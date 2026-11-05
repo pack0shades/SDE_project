@@ -3,7 +3,7 @@
 import re
 from collections.abc import Sequence
 
-from . import llm, prompts, rag
+from . import llm, memory, prompts, rag
 from .config import Regulation, settings
 from .schemas import Chunk, Finding, Report, Section
 from .store import VectorStore
@@ -56,6 +56,17 @@ def _hinted(reg: Regulation, policy: VectorStore) -> list[Section]:
     return [policy.sections[i] for i in dict.fromkeys(f"{doc}:art{n}" for n in nums) if i in policy.sections]
 
 
+def recalled(reqs: list[Chunk], reg: Regulation, agent: str, trace: list[dict]) -> dict[str, str]:
+    """Past expert decisions per requirement id, as prompt text; each recall is traced."""
+    out = {}
+    for r in reqs:
+        fbs = memory.recall(r.text, reg.name)
+        if fbs:
+            trace.append({"agent": agent, "requirement_id": r.id, "recalled": [fb.model_dump(mode="json") for fb in fbs]})
+        out[r.id] = memory.as_prompt(fbs)
+    return out
+
+
 def supported(ids: list[str], supplied: list[str], agent: str, requirement_id: str, trace: list[dict]) -> list[str]:
     """Clause ids mapped onto the articles actually shown to the LLM; invented ones are dropped and traced."""
     mapped = [_parent(c, supplied) for c in ids]
@@ -80,11 +91,12 @@ def assess(agent: str, reqs: list[Chunk], policy: VectorStore, reg: Regulation, 
     for sec in _hinted(reg, policy):  # reviewers' hints name articles the model must be able to cite
         articles.setdefault(sec.id, sec)
     supplied = list(articles)
+    past = recalled(reqs, reg, agent, trace)
 
     def entry(r: Chunk) -> str:
         note = f"\n<review_note>{notes[r.id]}</review_note>" if r.id in notes else ""
         relevant = ", ".join(h.section.id for h in hits[r.id])
-        return f'<requirement id="{r.id}" relevant="{relevant}">{r.text}{note}</requirement>'
+        return f'<requirement id="{r.id}" relevant="{relevant}">{r.text}{note}{past[r.id]}</requirement>'
 
     def one_each(fs: list[Finding]) -> None:
         if sorted(f.requirement_id for f in fs) != sorted(hits):

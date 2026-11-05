@@ -105,6 +105,9 @@ For each requirement, reason step by step:
    Leave the suggestion empty when compliant.
 If a requirement carries a <review_note>, re-evaluate it in the light of that note; if you still disagree,
 explain why in detail in the rationale.
+Requirements may carry <past_decision> entries: decisions human experts made on similar requirements in
+earlier reviews ("accept" confirmed the system's finding, "reject" overruled it, "escalate" sent it to a
+specialist), with their justification. Follow them where they apply, and say so in the rationale.
 {hints}
 Keep each rationale under 150 words and each suggestion under 100 words. Plain text only: no markdown,
 and no double quotes inside values (use single quotes).
@@ -144,6 +147,10 @@ both checkers' final positions and how far they agreed. For each one, decide the
 - "suggestion": the improved requirement, merging the best of the checkers' rewrites; empty when compliant.
 - "confidence" between 0 and 1: 0.8 to 1 when both checkers agreed in iteration 1, 0.5 to 0.8 when they
   agreed only after revision, below 0.5 when they still disagree.
+Requirements may carry <past_decision> entries: decisions human experts made on similar requirements in
+earlier reviews ("accept" confirmed the system's finding, "reject" overruled it, "escalate" sent it to a
+specialist), with their justification. Where experts rejected a similar finding, mark the requirement compliant or
+lower the confidence, unless it differs materially; say which in the rationale.
 Return only a JSON array with one object per requirement, in this shape (plain strings except "clauses",
 a list of ids, and "confidence", a number):
 [{{"requirement_id": "{example_req}", "clauses": ["{example_art}"], "rationale": "...", "status": "partial",

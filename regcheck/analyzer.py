@@ -1,7 +1,7 @@
 """Report Analyzer agent (paper 4.3): find disagreements, judge them, compile the final report."""
 
 from . import llm, prompts
-from .checker import supported
+from .checker import recalled, supported
 from .config import Regulation, settings
 from .schemas import Dispute, FinalReport, Finding, Issue, Report, Resolution, Verdict
 from .store import VectorStore
@@ -78,13 +78,15 @@ def compile(reports: dict[str, Report], disputes: list[Dispute], srs: VectorStor
             return "the checkers agreed only after revision"
         return "the checkers still disagree"
 
+    past = recalled([srs.chunk(rid) for rid in flagged], reg, AGENT, trace)
+
     def entry(rid: str) -> str:
         d = disputed.get(rid)
         history = (f'\n<dispute flagged_by="{d.flagged_by}" rationale_valid="{d.valid}">{d.message}</dispute>'
                    if d else "")
         positions = "\n".join(_position(a, fs.get(rid)) for a, fs in found.items())
         return (f'<requirement id="{rid}" agreement="{agreement(rid)}">\n<text>{srs.chunk(rid).text}</text>\n'
-                f'{positions}{history}\n</requirement>')
+                f'{positions}{history}{past[rid]}\n</requirement>')
 
     issues = []
     for batch in _batches(flagged):

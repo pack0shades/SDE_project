@@ -372,6 +372,8 @@ def recall(requirement: str, regulation: str, k: int = 3) -> list[Feedback]
 
 `memory.py` is a `VectorStore` at `data/memory/` whose chunks are past requirements with the `Feedback` record in `Chunk.meta`. `recall` returns the nearest past decisions for the same regulation above a similarity threshold, so unrelated feedback does not leak into prompts. Recalled decisions are injected into the `assess` and `compile` prompts as "past expert decisions on similar requirements".
 
+Built in phase 6: the recall threshold is cosine 0.8, measured on bge-large (a lightly reworded requirement scores about 0.9; a different requirement on the same topic, and a heavy paraphrase, both about 0.72). Each recall is also written to the trace. `run` writes `run.json` (`srs`, `reg`) so the app can reopen a run.
+
 This replaces the paper's Redis, RedisGraph and Neo4j memory (3.4.2, 4.4) with files. The mapping: the paper's long-term "scenario-based expert feedback" and "feedback with reasons and flaws" are the feedback store. Its short-term memory is the state of the current run and the Streamlit session. The other feedback channel is the `hints` list in `config.toml`, where a human adds a tuned sub-prompt after spotting a systematic miss.
 
 `app.py`, one Streamlit file:

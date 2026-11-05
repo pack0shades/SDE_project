@@ -10,7 +10,7 @@ import numpy as np
 import pytest
 from pydantic import TypeAdapter
 
-from regcheck import llm
+from regcheck import llm, memory
 from regcheck.checker import _parent
 from regcheck.ingest import split_sections
 from regcheck.schemas import Finding, Report
@@ -21,6 +21,15 @@ from regcheck.store import _mmr
 def _isolated_cache(tmp_path, monkeypatch):
     monkeypatch.setattr(llm, "CACHE", tmp_path / "cache")
     monkeypatch.setattr(llm.time, "sleep", lambda s: None)
+    monkeypatch.setattr(memory, "STORE", tmp_path / "memory")
+
+
+def fake_embed(texts, query=False):  # bag of words hashed into 32 dims
+    v = np.full((len(texts), 32), 1e-3, "float32")
+    for i, t in enumerate(texts):
+        for w in re.findall(r"\w+", t.lower()):
+            v[i, zlib.crc32(w.encode()) % 32] += 1
+    return v / np.linalg.norm(v, axis=1, keepdims=True)
 
 
 def _scripted(monkeypatch, replies):
@@ -149,13 +158,6 @@ def test_pipeline_resolves_a_dispute_end_to_end(tmp_path, monkeypatch):
     from regcheck import pipeline, store
     from regcheck.schemas import Chunk, Section
 
-    def fake_embed(texts, query=False):  # bag of words hashed into 32 dims
-        v = np.full((len(texts), 32), 1e-3, "float32")
-        for i, t in enumerate(texts):
-            for w in re.findall(r"\w+", t.lower()):
-                v[i, zlib.crc32(w.encode()) % 32] += 1
-        return v / np.linalg.norm(v, axis=1, keepdims=True)
-
     monkeypatch.setattr(store, "embed", fake_embed)
     monkeypatch.setattr(store, "rerank_scores", lambda q, ts: [float(len(set(q.split()) & set(t.split()))) for t in ts])
     monkeypatch.setattr(pipeline, "store_path", lambda doc, mode="agentic": tmp_path / doc)
@@ -218,3 +220,17 @@ def test_hinted_articles_expand_ranges_and_skip_unknown():
                              sections=sections)
     reg = SimpleNamespace(hints=["as required by Article 32", "Article 5(1)(e) and Articles 15 to 17, Article 99"])
     assert [s.id for s in _hinted(reg, policy)] == ["gdpr:art32", "gdpr:art5", "gdpr:art15", "gdpr:art16", "gdpr:art17"]
+
+
+def test_memory_recalls_same_regulation_similar_requirement_only(monkeypatch):
+    from regcheck import store
+    from regcheck.schemas import Feedback
+
+    monkeypatch.setattr(store, "embed", fake_embed)
+    memory.remember(Feedback(requirement="User passwords will be stored in plain text.", regulation="GDPR",
+                             clauses=["gdpr:art32"], status="non_compliant", decision="reject",
+                             justification="Legacy import only; hashed on first login."))
+    [fb] = memory.recall("User passwords will be stored in plain text.", "GDPR")
+    assert fb.decision == "reject" and "Legacy import" in memory.as_prompt([fb])
+    assert memory.recall("User passwords will be stored in plain text.", "EU Data Act") == []
+    assert memory.recall("The dashboard shall use the corporate colour scheme.", "GDPR") == []
