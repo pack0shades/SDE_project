@@ -1,0 +1,13 @@
+Toy Online Shop - Software Requirements Specification
+
+1 User accounts
+1.1 Users shall register with an email address, full name, postal address and password.
+1.2 User passwords will be stored in plain text.
+
+2 Data storage
+2.1 User data will be stored in a secure database using industry-standard encryption practices.
+2.2 The system shall record each user's browsing activity and purchase history for marketing analytics.
+
+3 Interface
+3.1 The dashboard shall use the corporate colour scheme.
+3.2 The system shall send an order confirmation email to the user's registered email address.
