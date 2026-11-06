@@ -14,7 +14,10 @@ dependencies = [
 
 [dependency-groups]
 dev = ["pytest", "ruff"]
-eval = ["ragas"]
+eval = [
+    "langchain-community<0.4",  # ragas 0.4.3 imports chat_models.vertexai, removed in 0.4
+    "ragas",
+]
 web = ["ddgs"]
 
 [tool.uv]

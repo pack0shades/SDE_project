@@ -1,0 +1,340 @@
+{
+  "doc": "data_act",
+  "agent": "cc1",
+  "model": "mistral/ministral-14b-latest",
+  "mode": "advanced",
+  "n": 10,
+  "means": {
+    "context_precision": 0.845,
+    "context_recall": 1.0,
+    "answer_relevancy": 0.852,
+    "faithfulness": 0.842
+  },
+  "questions": [
+    {
+      "question": "Are data holders required to charge for data provided in response to a public emergency under Article 15(1), point (a)?",
+      "reference": "No, data holders other than microenterprises and small enterprises must make such data available free of charge.",
+      "answer": "No, **data holders are not required to charge fees** for data provided in response to a **public emergency** under **[data_act:art15](1)(a)**\u2014**only if** the following conditions are met:\n\n1. The situation qualifies as a **public emergency** as defined in **[data_act:art2](29)** (exceptional, time-limited, officially declared, and affecting the Union or a Member State).\n2. The data is **necessary to address the emergency** and no alternative means exist **[data_act:art15](1)(a)**.\n\n**Fee exemption applies only to data holders other than microenterprises and small enterprises** **[data_act:art20](1)**.\n\n*(Note: The original question referenced **GDPR Article 15(1)(a)**, but the provided sub-answers pertain to the **EU Data Act**. If GDPR-specific guidance is needed, it would require separate analysis.)*",
+      "sources": [
+        "data_act:art20",
+        "data_act:art17",
+        "data_act:art10",
+        "data_act:art2",
+        "data_act:art4",
+        "data_act:art10",
+        "data_act:art2",
+        "data_act:art15",
+        "data_act:art32",
+        "data_act:art17",
+        "data_act:art20",
+        "data_act:art18",
+        "data_act:art15",
+        "data_act:art14",
+        "data_act:art17",
+        "data_act:art2",
+        "data_act:art20",
+        "data_act:art18",
+        "data_act:art17",
+        "data_act:art15"
+      ],
+      "scores": {
+        "context_precision": 0.9999999999,
+        "context_recall": 1.0,
+        "answer_relevancy": 0.9104854418597342,
+        "faithfulness": 0.7777777777777778
+      }
+    },
+    {
+      "question": "What information must a related service provider disclose to a user regarding the sharing of data with third parties?",
+      "reference": "The provider must disclose whether it intends to allow third parties to use the data for purposes agreed upon with the user, and explain how the user can request that data be shared with a third party or end such data sharing.",
+      "answer": "Based on the sub-question answers, a **related service provider** must disclose the following regarding the sharing of data with third parties:\n\n1. **Data categories** \u2013 The **readily available data** and **relevant metadata** in a structured, machine-readable format ([data_act:art5] and [data_act:art4]).\n   *(Note: Trade secrets must be identified in metadata and shared only to the extent strictly necessary ([data_act:art5(9)]).)*\n\n2. **Third-party entities** \u2013 The **identity of the third party** receiving the data (if sharing is intended) ([data_act:art3(2)(d)]).\n   *(Note: Gatekeepers are excluded from receiving data under [data_act:art5(3)].)*\n\n3. **Purposes or use cases** \u2013 The **purposes for which the data are to be used** by the third party ([data_act:art3(3)(c)]).\n\n4. **User rights and opt-out mechanisms** \u2013\n   - How the user can **request data sharing with a third party** and **end data sharing** ([data_act:art3(2)(f)]).\n   - How the user can **lodge a complaint** with the competent authority ([data_act:art3(2)(g)]).\n\n*(Note: The sub-answers do not cover whether the provider must disclose the legal basis for sharing personal data or specific technical/organizational measures for trade secret protection.)*",
+      "sources": [
+        "data_act:art4",
+        "data_act:art5",
+        "data_act:art11",
+        "data_act:art3",
+        "data_act:art3",
+        "data_act:art17",
+        "data_act:art4",
+        "data_act:art5",
+        "data_act:art19",
+        "data_act:art17",
+        "data_act:art33",
+        "data_act:art3",
+        "data_act:art14",
+        "data_act:art37",
+        "data_act:art3",
+        "data_act:art4",
+        "data_act:art21",
+        "data_act:art25",
+        "data_act:art11"
+      ],
+      "scores": {
+        "context_precision": 0.249999999975,
+        "context_recall": 1.0,
+        "answer_relevancy": 0.9874743069522791,
+        "faithfulness": 0.8333333333333334
+      }
+    },
+    {
+      "question": "What types of obstacles are providers of data processing services required to remove to facilitate customer switching?",
+      "reference": "Providers must remove pre-commercial, commercial, technical, contractual, and organisational obstacles that inhibit customers from switching services or providers.",
+      "answer": "Providers of data processing services are **required to remove** the following obstacles to facilitate customer switching:\n\n1. **Contractual and financial barriers**:\n   - **Switching charges** (except for reduced cost-recovery fees until 2027) **[data_act:art29]**.\n   - **Unreasonable notice periods** (beyond 2 months) **[data_act:art25(2)(d)]**.\n   - **Unfair termination penalties** or clauses preventing termination within a reasonable period **[data_act:art13(5)(d), (f)]**.\n   - **Unilateral price changes** without valid reason or termination rights **[data_act:art13(5)(g)]**.\n\n2. **Technical and integration barriers**:\n   - **Proprietary APIs, integration locks, or closed systems** that prevent **functional equivalence** in new services **[data_act:art23(d)]**.\n   - **Lack of open interfaces** (free of charge) for data portability and interoperability **[data_act:art30(2)]**.\n   - **Failure to comply with open interoperability standards** **[data_act:art30(3)]**.\n   - **Non-compliance with structured, machine-readable data formats** (if no standards exist) **[data_act:art30(5)]**.\n\n3. **Legal and compliance-related barriers**:\n   - **Trade secret protections** that **do not impede switching** (exemptions allowed only if they do not create obstacles) **[data_act:art25(2)(f)]**.\n   - **Intellectual property (IP) restrictions** on digital assets that are **not required to be disclosed or transferred** **[data_act:art30(6)]**.\n\n**Not covered in the provided text**:\n- **Data residency requirements** (e.g., mandatory storage in specific jurisdictions).\n- **Audit trail or compliance obligations** (e.g., logging, monitoring) that could restrict portability.",
+      "sources": [
+        "data_act:art23",
+        "data_act:art2",
+        "data_act:art30",
+        "data_act:art25",
+        "data_act:art29",
+        "data_act:art23",
+        "data_act:art26",
+        "data_act:art29",
+        "data_act:art30",
+        "data_act:art25",
+        "data_act:art2",
+        "data_act:art34",
+        "data_act:art13",
+        "data_act:art25",
+        "data_act:art29",
+        "data_act:art26",
+        "data_act:art5",
+        "data_act:art35",
+        "data_act:art30",
+        "data_act:art36"
+      ],
+      "scores": {
+        "context_precision": 0.9999999999,
+        "context_recall": 1.0,
+        "answer_relevancy": 0.9905199762672716,
+        "faithfulness": 1.0
+      }
+    },
+    {
+      "question": "What regulatory requirement must open interoperability specifications comply with according to Article 35?",
+      "reference": "Open interoperability specifications must comply with Annex II to Regulation (EU) No 1025/2012.",
+      "answer": "According to **Article 35**, open interoperability specifications must comply with the following **regulatory requirements**:\n\n1. **Essential objectives** ([data_act:art35.1]):\n   - Achieve **interoperability** (where technically feasible) ([data_act:art35.1(a)]).\n   - Ensure **portability of digital assets** ([data_act:art35.1(b)]).\n   - Enable **functional equivalence** (where technically feasible) ([data_act:art35.1(c)]).\n   - Maintain **security and integrity** ([data_act:art35.1(d)]).\n   - Support **innovation and technical advances** ([data_act:art35.1(e)]).\n\n2. **Scope of interoperability** ([data_act:art35.2]):\n   - Address **cloud interoperability** (transport, syntactic, semantic, behavioural, and policy) ([data_act:art35.2(a)]).\n   - Address **data portability** (syntactic, semantic, and policy) ([data_act:art35.2(b)]).\n   - Address **application portability** (syntactic, instruction, metadata, behaviour, and policy) ([data_act:art35.2(c)]).\n\n3. **Compliance with standards** ([data_act:art35.3]):\n   - Must align with **Annex II of Regulation (EU) No 1025/2012** (standardisation process).\n\n*(The sub-answers do not cover **mandatory technical elements** like formats, accessibility, or documentation\u2014these would be defined in harmonised standards or common specifications, not directly in Article 35.)*",
+      "sources": [
+        "data_act:art30",
+        "data_act:art35",
+        "data_act:art2",
+        "data_act:art17",
+        "data_act:art32",
+        "data_act:art30",
+        "data_act:art35",
+        "data_act:art26",
+        "data_act:art2",
+        "data_act:art34",
+        "data_act:art30",
+        "data_act:art35",
+        "data_act:art34",
+        "data_act:art37",
+        "data_act:art36",
+        "data_act:art30",
+        "data_act:art35",
+        "data_act:art26",
+        "data_act:art33",
+        "data_act:art2"
+      ],
+      "scores": {
+        "context_precision": 0.49999999995,
+        "context_recall": 1.0,
+        "answer_relevancy": 0.9699530426683055,
+        "faithfulness": 1.0
+      }
+    },
+    {
+      "question": "Are microenterprises and small enterprises eligible to claim compensation for making data available under Article 15(1), point (b)?",
+      "reference": "Yes, the provisions for fair compensation apply to microenterprises and small enterprises when they claim compensation for making data available.",
+      "answer": "The provided sub-answers do **not** directly address whether **microenterprises and small enterprises** are eligible to claim compensation under **Article 15(1)(b) of the GDPR**.\n\nThe passages only clarify:\n- The GDPR does **not** define size thresholds for micro/small enterprises ([data_act:art2]).\n- The **Data Act** (not GDPR) references these definitions ([data_act:art2], [data_act:art7]).\n- Neither the GDPR nor CJEU case law links **Article 15(1)(b) compensation claims** to enterprise size or legal status.\n\nSince the question pertains to **GDPR Article 15(1)(b)**, and the sub-answers do not cover this, **the eligibility of micro/small enterprises under GDPR remains unaddressed** in the provided context.",
+      "sources": [
+        "data_act:art20",
+        "data_act:art9",
+        "data_act:art17",
+        "data_act:art4",
+        "data_act:art7",
+        "data_act:art20",
+        "data_act:art49",
+        "data_act:art9",
+        "data_act:art2",
+        "data_act:art20",
+        "data_act:art7",
+        "data_act:art15",
+        "data_act:art14",
+        "data_act:art2",
+        "data_act:art20",
+        "data_act:art9",
+        "data_act:art12",
+        "data_act:art10",
+        "data_act:art4"
+      ],
+      "scores": {
+        "context_precision": 0.9999999999,
+        "context_recall": 1.0,
+        "answer_relevancy": 0.0,
+        "faithfulness": 0.14285714285714285
+      }
+    },
+    {
+      "question": "What is the purpose of the monitoring mechanism the Commission is empowered to establish regarding switching charges?",
+      "reference": "The monitoring mechanism is intended to ensure that the withdrawal and reduction of switching charges are achieved in accordance with the deadlines established in the regulation.",
+      "answer": "The **Commission\u2019s monitoring mechanism** for switching charges, as empowered under **[data_act:art29(7)]**, explicitly aims to:\n\n1. **Ensure compliance with the withdrawal and reduction deadlines** for switching charges, as mandated in **[data_act:art29(1-2)]** (full ban by **12 January 2027** and phased reduction from **11 January 2024**).\n2. **Supplement the Regulation via delegated acts** to establish a framework for monitoring these charges, as referenced in **[data_act:art45]**.\n\n*(The mechanism does not directly enforce penalties or investigate non-compliance\u2014those powers rest with Member State authorities under **[data_act:art37]**.)*",
+      "sources": [
+        "data_act:art29",
+        "data_act:art2",
+        "data_act:art37",
+        "data_act:art1",
+        "data_act:art17",
+        "data_act:art29",
+        "data_act:art49",
+        "data_act:art2",
+        "data_act:art25",
+        "data_act:art17",
+        "data_act:art29",
+        "data_act:art2",
+        "data_act:art25",
+        "data_act:art37",
+        "data_act:art17",
+        "data_act:art29",
+        "data_act:art2",
+        "data_act:art37",
+        "data_act:art25",
+        "data_act:art33"
+      ],
+      "scores": {
+        "context_precision": 0.9999999999,
+        "context_recall": 1.0,
+        "answer_relevancy": 0.9085826374000142,
+        "faithfulness": 1.0
+      }
+    },
+    {
+      "question": "What information must providers disclose to prospective customers before entering into a contract?",
+      "reference": "Providers must provide clear information regarding standard service fees, early termination penalties, and any reduced switching charges that may be imposed between 11 January 2024 and 12 January 2027.",
+      "answer": "Based on the provided sub-answers, providers must disclose the following information to prospective customers **before entering into a contract** under the **EU Data Act**:\n\n1. **Switching charges and service fees** ([data_act:art29:4\u20135])\n   - Standard service fees, early termination penalties, and reduced switching charges (if applicable).\n\n2. **Contractual terms for switching** ([data_act:art25:1\u20132])\n   - The **full contract** in a storable/reproducible format, including:\n     - Rights and obligations for switching, porting, and data retrieval ([data_act:art25:2(a\u2013h)]).\n     - Switching charges ([data_act:art25:2(i)]).\n     - Technical limitations (e.g., unfeasibility of switching) ([data_act:art25:4]).\n\n3. **Product/Service Data Accessibility** ([data_act:art3:2\u20133])\n   - For **connected products and related services**:\n     - Data types, formats, volume, real-time capability, storage, and access/erasure methods ([data_act:art3:2(a\u2013d)]).\n     - Data holder identity, retention, third-party use, trade secrets, and contract terms ([data_act:art3:3(a\u2013i)]).\n\n4. **Information on switching/porting procedures** ([data_act:art26])\n   - Available **switching/porting methods, formats, and restrictions**.\n   - Reference to an **online register** of data structures/formats/standards ([data_act:art26(b)]).\n\n---\n**Not covered in the sub-answers:**\n- **Industry-specific disclosure requirements** (e.g., financial services, healthcare, or telecom regulations).\n- **General contract law obligations** (e.g., material facts under misrepresentation laws or unfair contract terms beyond [data_act:art13]).",
+      "sources": [
+        "data_act:art29",
+        "data_act:art3",
+        "data_act:art25",
+        "data_act:art26",
+        "data_act:art4",
+        "data_act:art29",
+        "data_act:art25",
+        "data_act:art3",
+        "data_act:art10",
+        "data_act:art26",
+        "data_act:art3",
+        "data_act:art13",
+        "data_act:art29",
+        "data_act:art3",
+        "data_act:art19",
+        "data_act:art4",
+        "data_act:art32"
+      ],
+      "scores": {
+        "context_precision": 0.9999999999,
+        "context_recall": 1.0,
+        "answer_relevancy": 0.9179486350817212,
+        "faithfulness": 1.0
+      }
+    },
+    {
+      "question": "What action must the Commission take if a harmonised standard is published that covers the same requirements as an existing implementing act?",
+      "reference": "If a harmonised standard is published in the Official Journal of the European Union, the Commission must repeal the implementing acts, or parts thereof, that cover the same essential requirements as those addressed by the harmonised standard.",
+      "answer": "If a harmonised standard is published covering the same requirements as an existing implementing act, the Commission **must repeal** the implementing act (or the relevant parts thereof) **[data_act:art36:10, data_act:art33:9]**.\n\n*(No public consultation or stakeholder review is mandated for this repeal action.)*",
+      "sources": [
+        "data_act:art33",
+        "data_act:art30",
+        "data_act:art35",
+        "data_act:art2",
+        "data_act:art36",
+        "data_act:art36",
+        "data_act:art33",
+        "data_act:art35",
+        "data_act:art30",
+        "data_act:art2",
+        "data_act:art36",
+        "data_act:art33",
+        "data_act:art35",
+        "data_act:art30",
+        "data_act:art2",
+        "data_act:art33",
+        "data_act:art35",
+        "data_act:art36",
+        "data_act:art37",
+        "data_act:art32"
+      ],
+      "scores": {
+        "context_precision": 0.699999999965,
+        "context_recall": 1.0,
+        "answer_relevancy": 0.9999999999999998,
+        "faithfulness": 1.0
+      }
+    },
+    {
+      "question": "What must a data processing service provider include in their online register to fulfill their information obligations?",
+      "reference": "The online register must contain details of all data structures, data formats, relevant standards, and open interoperability specifications in which exportable data is available.",
+      "answer": "Under the **EU Data Act**, a **data processing service provider** must include the following in their **online register** to fulfill their information obligations:\n\n1. **Data structures, formats, and interoperability specifications** ([data_act:art26(b)])\n   - Details of **all data structures and data formats** used.\n   - Relevant **standards and open interoperability specifications** for exportable data ([data_act:art25(2)(e)]).\n\n2. **Obligation to update the register** ([data_act:art30(4)])\n   - The register must be **updated to reflect compliance** with common specifications or harmonised standards for interoperability ([data_act:art35(8)]).\n\n**Not covered in the sub-answers:**\n- The register **does not** include GDPR-related details such as legal bases for processing, data subject rights, or purposes of processing. These fall under **GDPR Article 30**, not the Data Act.",
+      "sources": [
+        "data_act:art26",
+        "data_act:art17",
+        "data_act:art4",
+        "data_act:art21",
+        "data_act:art2",
+        "data_act:art30",
+        "data_act:art2",
+        "data_act:art21",
+        "data_act:art35",
+        "data_act:art24",
+        "data_act:art1",
+        "data_act:art21",
+        "data_act:art2",
+        "data_act:art26",
+        "data_act:art33",
+        "data_act:art26",
+        "data_act:art30",
+        "data_act:art44",
+        "data_act:art4",
+        "data_act:art37"
+      ],
+      "scores": {
+        "context_precision": 0.9999999999,
+        "context_recall": 1.0,
+        "answer_relevancy": 0.9099933471717326,
+        "faithfulness": 0.6666666666666666
+      }
+    },
+    {
+      "question": "What specific information regarding ICT infrastructure must data processing service providers publish on their websites?",
+      "reference": "Providers must publish the jurisdiction to which the ICT infrastructure deployed for the data processing of their individual services is subject.",
+      "answer": "Based on the provided sub-answers, the **specific ICT infrastructure details** that data processing service providers must publish on their websites under the **Data Act** are:\n\n1. **Jurisdiction** of the ICT infrastructure ([data_act:art28.1(a)]).\n2. A **general description** of technical, organizational, and contractual measures to prevent unauthorized international access ([data_act:art28.1(b)]).\n\nThe sub-answers **do not cover** whether:\n- **Third-party subprocessor names** must be disclosed.\n- **Specific technical measures** (e.g., encryption, access controls) must be published.\n- **Detailed ICT capabilities** of subprocessors must be shared.\n\nThus, the **Data Act** only mandates **jurisdiction and high-level security measures**, not granular technical or subprocessor details.",
+      "sources": [
+        "data_act:art28",
+        "data_act:art25",
+        "data_act:art2",
+        "data_act:art30",
+        "data_act:art4",
+        "data_act:art8",
+        "data_act:art11",
+        "data_act:art21",
+        "data_act:art32",
+        "data_act:art17",
+        "data_act:art28",
+        "data_act:art29",
+        "data_act:art30",
+        "data_act:art26",
+        "data_act:art5",
+        "data_act:art25",
+        "data_act:art29",
+        "data_act:art30",
+        "data_act:art28",
+        "data_act:art26"
+      ],
+      "scores": {
+        "context_precision": 0.9999999999,
+        "context_recall": 1.0,
+        "answer_relevancy": 0.9292575215517802,
+        "faithfulness": 1.0
+      }
+    }
+  ]
+}

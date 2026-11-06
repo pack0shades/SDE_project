@@ -487,6 +487,15 @@ The paper's evaluation is scaled down to what free tiers and a student team can 
 
 Free-tier budgeting: a compliance check costs about 25 calls. RAGAs is the expensive part, at roughly 15 calls per question once answering and judging are counted. Keep question sets small, rely on the disk cache, and run the heavy evaluation on the provider with the largest quota.
 
+**As built (phase 7):**
+- `ragas` 0.4.3 is used through its `metrics.collections` API. Its LLM is a 10-line `Judge` adapter over `llm.complete_json("judge", ...)`. Its embeddings are the pipeline's bge-large model. Judging is therefore cached, retried and traced like every other call. ragas posts usage telemetry by default, so `RAGAS_DO_NOT_TRACK` is set before import. ragas 0.4.3 imports a module that `langchain-community` 0.4 removed, so the eval group pins `langchain-community<0.4`.
+- Answer relevancy uses `strictness=1` instead of ragas' default of 3, which saves two judge calls per question. Context precision costs one judge call per retrieved passage. CoT answers retrieve 10 to 15 parent articles, so a real advanced question costs about 25 calls and 2.5 minutes, not 15 calls.
+- QA sets: `--n 10` sections per document, which gives about 40 pairs; the default stays 30. Pairs are shuffled with the fixed seed so that `ragas_eval --limit 10` covers many sections. `gen_qa` refuses to overwrite an existing file, because the file may hold the team's hand corrections. The pairs have not yet been reviewed by hand.
+- `gen_qa` drops questions that refer to the document itself, such as "What is covered in section 2 of the document?". These broke the prompt's self-contained rule and no retriever can answer them. In the first e-store run they made up 4 of 10 questions, and each scored 0 recall. The filter removed 6 of 40 e-store pairs, 4 of 42 video-search pairs and none from the regulations.
+- Documents: GDPR, the Data Act, e-store and video-search. Video-search was chosen because it appears in all four of the paper's tables and is the smallest of those SRS (77 chunks).
+- Data Act `focus` now lists all six Article 1 areas. With only "connected products" named, both checkers screened out every requirement. With the full list they still flag nothing in e-store or video-search. Both vendors agree independently, and neither SRS involves connected products, data-sharing contracts or cloud switching. The paper reports 12 to 14 Data Act issues for Video Search. We report our 0 rather than loosen the prompts to manufacture findings.
+- The monolithic baseline uses `gemini-3.6-flash`, which has 20 free requests a day. Each SRS-regulation pair is one call, so pairs that hit the limit run after the daily reset.
+
 ## 11. Deliberate differences from the paper
 
 | Paper | This build | Reason |

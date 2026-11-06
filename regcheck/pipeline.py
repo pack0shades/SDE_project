@@ -100,4 +100,5 @@ def monolithic(srs_name: str, reg_key: str) -> Path:
     for f in findings:
         f.clauses = checker.supported(f.clauses, list(policy.sections), "monolithic", f.requirement_id, trace)
     return _save(f"{srs_name}-{reg_key}-monolithic",
-                 {"monolithic.json": [f.model_dump() for f in findings], "trace.json": trace})
+                 {"run.json": {"srs": srs_name, "reg": reg_key}, "monolithic.json": [f.model_dump() for f in findings],
+                  "trace.json": trace})

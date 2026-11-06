@@ -234,3 +234,19 @@ def test_memory_recalls_same_regulation_similar_requirement_only(monkeypatch):
     assert fb.decision == "reject" and "Legacy import" in memory.as_prompt([fb])
     assert memory.recall("User passwords will be stored in plain text.", "EU Data Act") == []
     assert memory.recall("The dashboard shall use the corporate colour scheme.", "GDPR") == []
+
+
+def test_ragas_judge_adapter_scores_through_llm_complete(monkeypatch):
+    """ragas' prompts reach llm.complete and its schemas parse our replies (guards against ragas API drift)."""
+    pytest.importorskip("ragas")
+    from ragas.metrics.collections import ContextPrecision
+
+    from eval.ragas_eval import Judge
+
+    # one verdict per context, in order: relevant, irrelevant -> average precision 1.0
+    sent = _scripted(monkeypatch, ['{"reason": "states it", "verdict": 1}', '{"reason": "unrelated", "verdict": 0}'])
+    score = ContextPrecision(llm=Judge([])).score(user_input="How long may data be kept?",
+                                                  reference="No longer than necessary.",
+                                                  retrieved_contexts=["Article 5(1)(e) storage limitation", "Colours"])
+    assert len(sent) == 2 and "storage limitation" in sent[0][0]["content"]
+    assert score.value == pytest.approx(1.0)

@@ -48,6 +48,14 @@ class Step(BaseModel):
     sources: list[str]  # Section or Chunk ids retrieved for this step
 
 
+class QA(BaseModel):
+    """A ground-truth pair for RAGAs (paper 6.1.1)."""
+
+    question: str
+    answer: str
+    section: str = ""  # Section id the pair was generated from
+
+
 class Answer(BaseModel):
     question: str
     text: str

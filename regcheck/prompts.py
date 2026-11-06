@@ -75,6 +75,18 @@ citations in square brackets. If the sub-answers do not cover part of the questi
 
 Original question: {question}"""
 
+# Paper 6.1.1, verbatim, plus the output format.
+GEN_QA = """You are an expert in creating evaluation datasets for RAG systems. Based only on the text provided
+below, generate 3-5 high-quality and diverse question-answer pairs.
+- The questions should test the understanding of the core concepts, obligations, or requirements in the text.
+- The answers must be concise and directly extracted or synthesized from the provided text. Do not use any
+external knowledge.
+- Both the question and the answer must be self-contained and fully understandable without the original
+context.
+Return only a JSON array of objects with keys "question" and "answer".
+
+Provided Text: {text}"""
+
 
 # --- Compliance Checker agent (paper 3.2.1) ---
 
