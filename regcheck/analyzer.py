@@ -1,5 +1,7 @@
 """Report Analyzer agent (paper 4.3): find disagreements, judge them, compile the final report."""
 
+import re
+
 from . import llm, prompts
 from .checker import recalled, supported
 from .config import Regulation, settings
@@ -27,10 +29,59 @@ def _batches[T](items: list[T]) -> list[list[T]]:
 
 
 def _one_each(ids: list[str]):
-    def check(items: list) -> None:
-        if sorted(i.requirement_id for i in items) != sorted(ids):
+    def check(items: list | dict) -> None:
+        got = items if isinstance(items, dict) else [i.requirement_id for i in items]
+        if sorted(got) != sorted(ids):
             raise ValueError(f"need exactly one object per requirement id: {sorted(ids)}")
     return check
+
+
+def _words(text: str) -> list[str]:
+    return re.findall(r"[a-z0-9]+", text.lower())
+
+
+def leak(query: str, requirement: str, project: str) -> str:
+    """Why `query` must not leave the machine, or "" if it may.
+
+    ponytail: a lexical check (4 words copied from the requirement, or the project name); add named-entity
+    detection if SRS documents ever carry client names the file name does not.
+    """
+    q, r = _words(query), _words(requirement)
+    copied = {tuple(r[i:i + 4]) for i in range(len(r) - 3)}
+    if any(tuple(q[i:i + 4]) in copied for i in range(len(q) - 3)):
+        return "copies the requirement's wording"
+    if f" {' '.join(_words(project))} " in f" {' '.join(q)} ":
+        return "names the project"
+    return ""
+
+
+def _web(batch: list[Dispute], srs: VectorStore, reg: Regulation, trace: list[dict]) -> dict[str, str]:
+    """Paper 3.3.1: public web snippets per dispute. Only the RA's abstracted query is sent to the search."""
+    from ddgs import DDGS  # dependency group "web"
+    from ddgs.exceptions import DDGSException
+
+    ids = [d.requirement_id for d in batch]
+    items = "\n".join(f'<dispute requirement_id="{d.requirement_id}">\n<requirement>{srs.chunk(d.requirement_id).text}'
+                      f'</requirement>\n<rationale>{d.rationale}</rationale>\n</dispute>' for d in batch)
+    msgs = prompts.alpaca(prompts.RA_PERSONA.format(regulation=reg.name),
+                          prompts.SANITIZE_QUERY.format(regulation=reg.name, example_req=ids[0],
+                                                        data_note=prompts.DATA_NOTE),
+                          f"<disputes>\n{items}\n</disputes>")
+    found = {}
+    for rid, query in llm.complete_json(AGENT, msgs, dict[str, str], trace, validate=_one_each(ids)).items():
+        entry = {"agent": AGENT, "requirement_id": rid, "web_query": query}
+        trace.append(entry)
+        if why := leak(query, srs.chunk(rid).text, srs.path.name):
+            entry["web_blocked"] = why  # fail closed: no search rather than a leaky one
+            continue
+        try:
+            hits = DDGS().text(query, max_results=3)
+        except DDGSException as e:  # rate limits, timeouts: web context is optional, the check goes on
+            entry["web_error"] = str(e)[:200]
+            continue
+        entry["web_results"] = [h["href"] for h in hits]
+        found[rid] = "".join(f'\n<web_result url="{h["href"]}">{h["title"]}: {h["body"]}</web_result>' for h in hits)
+    return found
 
 
 def validate(disputes: list[Dispute], srs: VectorStore, policy: VectorStore, reg: Regulation,
@@ -38,15 +89,17 @@ def validate(disputes: list[Dispute], srs: VectorStore, policy: VectorStore, reg
     """Prompts (iii) and (iv): does the flagging rationale hold, and what should the other side reconsider."""
     out = []
     for batch in _batches(disputes):
+        web = _web(batch, srs, reg, trace) if settings().pipeline.web_search else {}
         ids = list(dict.fromkeys(c for d in batch for c in d.clauses))
         arts = "\n\n".join(f'<article id="{i}">{policy.section(i).ref}\n{policy.section(i).text}</article>'
                            for i in ids)
         items = "\n".join(f'<dispute requirement_id="{d.requirement_id}" flagged_by="{d.flagged_by}" '
                           f'missed_by="{d.missed_by}">\n<requirement>{srs.chunk(d.requirement_id).text}'
                           f'</requirement>\n<rationale clauses="{", ".join(d.clauses)}">{d.rationale}</rationale>'
-                          f'\n</dispute>' for d in batch)
+                          f'{web.get(d.requirement_id, "")}\n</dispute>' for d in batch)
         msgs = prompts.alpaca(prompts.RA_PERSONA.format(regulation=reg.name),
                               prompts.RA_VALIDATE.format(regulation=reg.name, example_req=batch[0].requirement_id,
+                                                         web_note=prompts.WEB_NOTE if web else "",
                                                          data_note=prompts.DATA_NOTE),
                               f"<articles>\n{arts}\n</articles>\n\n<disputes>\n{items}\n</disputes>")
         ids = [d.requirement_id for d in batch]

@@ -343,6 +343,13 @@ Optional phase 8 adds web search to `validate` (paper 3.3.1).
 
 Built in phase 5: `Dispute` carries the flagging agent's `clauses` so `validate` can show their text. The RA's JSON replies are `Verdict` and `Resolution` in `schemas.py` (`Issue` extends `Resolution`). `validate` and `compile` run in batches of `batch_size`, because one reply for a real SRS (E-Store: 22 issues) would exceed free-tier output caps; the summary is one more small RA call. `assess` also supplies the articles that `hints` name ("Article 32", "Articles 15 to 17"), otherwise the models cite them as told and the clause guard drops them. A failed run still writes its `trace.json` to `data/runs/<...>-failed/`. Checker prompts ask for plain-text values without double quotes and with length limits: Ministral's long markdown rationales put a stray `"` into the JSON.
 
+Built in phase 8 (`web_search = true`; off by default):
+- Before validating a batch, one RA call (`SANITIZE_QUERY`) returns one generic query per dispute.
+- `leak()` stops a query from going out if it copies four consecutive words of the requirement or contains the project name. A stopped query is not searched, and the trace records why. This is a lexical check; a named-entity check would be stronger.
+- Allowed queries go to `ddgs`. The top three snippets are added to the dispute as `<web_result>` tags. `WEB_NOTE` tells the RA that the articles take precedence over the snippets. A `DDGSException` skips the snippets for that dispute; there is no retry, so we do not push past the free endpoint's limits.
+- `run.json` records `web_search`, and `eval/tables.py` shows web runs as their own rows.
+- Live result on e-store GDPR: all 7 queries were generic and none was stopped. 4 of the 7 searches returned "No results found" from the free endpoint, so those disputes were validated on the articles alone. The RA's 7 verdicts matched the run without search. cc1 withdrew all 3 of its rejected flags instead of 1, so the final count went from 23 issues to 21.
+
 ### 8.7 `pipeline.py` (agent communication)
 
 ```python
@@ -494,7 +501,15 @@ Free-tier budgeting: a compliance check costs about 25 calls. RAGAs is the expen
 - `gen_qa` drops questions that refer to the document itself, such as "What is covered in section 2 of the document?". These broke the prompt's self-contained rule and no retriever can answer them. In the first e-store run they made up 4 of 10 questions, and each scored 0 recall. The filter removed 6 of 40 e-store pairs, 4 of 42 video-search pairs and none from the regulations.
 - Documents: GDPR, the Data Act, e-store and video-search. Video-search was chosen because it appears in all four of the paper's tables and is the smallest of those SRS (77 chunks).
 - Data Act `focus` now lists all six Article 1 areas. With only "connected products" named, both checkers screened out every requirement. With the full list they still flag nothing in e-store or video-search. Both vendors agree independently, and neither SRS involves connected products, data-sharing contracts or cloud switching. The paper reports 12 to 14 Data Act issues for Video Search. We report our 0 rather than loosen the prompts to manufacture findings.
+- The monolithic baseline sees the whole Act and flags 3 video-search requirements and 1 e-store requirement.
+  - The 3 video-search flags treat a favourites list as "related service data". Article 2 defines a related service as one tied to a connected product, so they are overreach.
+  - The e-store flag is a real miss on our side. Article 3(2) gives sellers of connected products a pre-contract information duty, and the e-store sells configurable computers.
+  - Our screening step trades this kind of indirect applicability for fewer false positives. A screening hint naming Article 3(2) for shops that sell devices would recover it.
 - The monolithic baseline uses `gemini-3.6-flash`, which has 20 free requests a day. Each SRS-regulation pair is one call, so pairs that hit the limit run after the daily reset.
+- Table 4 (completed 2026-11-07): both models share one retriever, so context recall is identical and context precision is within 0.05. The models differ on answer quality.
+  - Gemini answers only from context: faithfulness is 0.88 to 1.0, against 0.73 to 0.87 for Ministral.
+  - When retrieval misses, Gemini says so. ragas scores that kind of non-answer 0 for relevancy. Three such answers on video-search bring Gemini's answer relevancy there down to 0.62.
+  - Ministral pads its answers instead, which costs faithfulness.
 
 ## 11. Deliberate differences from the paper
 

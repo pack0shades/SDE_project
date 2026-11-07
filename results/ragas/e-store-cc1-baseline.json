@@ -1,0 +1,195 @@
+{
+  "doc": "e-store",
+  "agent": "cc1",
+  "model": "mistral/ministral-14b-latest",
+  "mode": "baseline",
+  "n": 10,
+  "means": {
+    "context_precision": 0.833,
+    "context_recall": 1.0,
+    "answer_relevancy": 0.978,
+    "faithfulness": 0.871
+  },
+  "questions": [
+    {
+      "question": "Are there any specific memory requirements for the web-based product?",
+      "reference": "No, there are no memory requirements for the product.",
+      "answer": "The passages do not specify any memory requirements for the web-based product. The only relevant mention is in **[e-store:s15:0]**, which states *\"There are no memory requirements.\"*",
+      "sources": [
+        "e-store:s15:0",
+        "e-store:s12:0",
+        "e-store:s6:0",
+        "e-store:s7:0",
+        "e-store:s3:0"
+      ],
+      "scores": {
+        "context_precision": 0.9999999999,
+        "context_recall": 1.0,
+        "answer_relevancy": 0.9846210552071462,
+        "faithfulness": 0.3333333333333333
+      }
+    },
+    {
+      "question": "Besides defining the problem statement, what does the SRS document focus on regarding stakeholders?",
+      "reference": "The document concentrates on the capabilities required by stakeholders and their needs while defining high-level product features.",
+      "answer": "The SRS document focuses on the following regarding stakeholders:\n\n1. **Capabilities and needs** of stakeholders ([e-store:s1:0]).\n2. **User characteristics** (e.g., target audience, user interface, and user viewpoint) ([e-store:s2:0], [e-store:s6:0]).\n3. **Stakeholder perspectives** on the product and its functionality ([e-store:s2:0]).",
+      "sources": [
+        "e-store:s7:0",
+        "e-store:s1:0",
+        "e-store:s2:0",
+        "e-store:s3:0",
+        "e-store:s6:0"
+      ],
+      "scores": {
+        "context_precision": 0.99999999995,
+        "context_recall": 1.0,
+        "answer_relevancy": 0.9205865532262734,
+        "faithfulness": 0.375
+      }
+    },
+    {
+      "question": "What level of availability is required for the internet service provider's network facilities?",
+      "reference": "The internet service provider must be able to provide 99.999% availability through their network facilities onto the internet.",
+      "answer": "The required availability level for the internet service provider's network facilities is **99.999%** [e-store:s11:0].",
+      "sources": [
+        "e-store:s11:0",
+        "e-store:s12:0",
+        "e-store:s6:0",
+        "e-store:s9:0",
+        "e-store:s4:0"
+      ],
+      "scores": {
+        "context_precision": 0.9999999999,
+        "context_recall": 1.0,
+        "answer_relevancy": 0.9863477397265787,
+        "faithfulness": 1.0
+      }
+    },
+    {
+      "question": "What is the requirement regarding the visual consistency of the system's web pages?",
+      "reference": "The system must provide a uniform look and feel across all web pages.",
+      "answer": "The requirement regarding the visual consistency of the system's web pages is:\n\n**\"The system shall provide a uniform look and feel between all the web pages.\"** [e-store:s10:0]",
+      "sources": [
+        "e-store:s10:0",
+        "e-store:s15:0",
+        "e-store:s9:0",
+        "e-store:s12:0",
+        "e-store:s6:0"
+      ],
+      "scores": {
+        "context_precision": 0.9999999999,
+        "context_recall": 1.0,
+        "answer_relevancy": 1.0,
+        "faithfulness": 1.0
+      }
+    },
+    {
+      "question": "Besides specifying requirements for new software, what other purposes can this SRS serve?",
+      "reference": "This SRS can be used to assist in the selection of in-house and commercial software products, or as a model for defining an organization or project-specific standard.",
+      "answer": "Based on the provided passages, the SRS can also serve the following purposes besides specifying requirements for new software:\n\n1. Assist in the **selection of in-house and commercial software products** ([e-store:s3:0]).\n2. Serve as a **model for defining an organization- or project-specific standard** ([e-store:s3:0]).",
+      "sources": [
+        "e-store:s2:0",
+        "e-store:s1:0",
+        "e-store:s3:0",
+        "e-store:s7:0",
+        "e-store:s6:0"
+      ],
+      "scores": {
+        "context_precision": 0.3333333333,
+        "context_recall": 1.0,
+        "answer_relevancy": 0.9833391914964583,
+        "faithfulness": 1.0
+      }
+    },
+    {
+      "question": "What specific information must be included in a customer profile to support email confirmation?",
+      "reference": "The system requires the customer's email information to be maintained as a required part of the customer profile.",
+      "answer": "The customer profile must include the **customer email information as a required part** to support email confirmation [e-store:s9:2].",
+      "sources": [
+        "e-store:s9:2",
+        "e-store:s9:1",
+        "e-store:s6:0",
+        "e-store:s13:0",
+        "e-store:s9:0"
+      ],
+      "scores": {
+        "context_precision": 0.9999999999,
+        "context_recall": 1.0,
+        "answer_relevancy": 0.9823306224827023,
+        "faithfulness": 1.0
+      }
+    },
+    {
+      "question": "What are the requirements for database storage on back-end internal computers?",
+      "reference": "The system must store all databases on redundant computers with automatic switchover, implement RAID V Disk Stripping on all storage disks, and provide replication of databases to off-site storage locations.",
+      "answer": "The requirements for database storage on back-end internal computers are as follows:\n\n- Storage of all databases must be on **redundant computers with automatic switchover** [e-store:s11:0].\n- **Replication of databases to off-site storage locations** must be provided [e-store:s11:0].\n- **RAID 5 disk stripping** must be implemented on all database storage disks [e-store:s11:0].\n- The **back-end databases must be encrypted** [e-store:s13:0].",
+      "sources": [
+        "e-store:s11:0",
+        "e-store:s6:0",
+        "e-store:s15:0",
+        "e-store:s13:0",
+        "e-store:s1:0"
+      ],
+      "scores": {
+        "context_precision": 0.9999999999,
+        "context_recall": 1.0,
+        "answer_relevancy": 0.9999999999999993,
+        "faithfulness": 1.0
+      }
+    },
+    {
+      "question": "Which external systems must the E-Store system communicate with to manage product configuration, payments, and shipping?",
+      "reference": "The E-Store system must communicate with the Configurator for component identification, the billPay system for payment processing, and the shipping system for tracking orders and updating shipping methods.",
+      "answer": "To manage **product configuration**, the E-Store system must communicate with:\n- **Configurator** ([e-store:s18:1:3], [e-store:s18:0:3.10.3:1]).\n\nTo manage **payments**, it must communicate with:\n- **billPay system** ([e-store:s18:1:4], [e-store:s18:0:3.10.3:4]).\n\nTo manage **shipping**, it must communicate with:\n- **Shipping system** ([e-store:s18:1:7]).",
+      "sources": [
+        "e-store:s18:1",
+        "e-store:s18:0",
+        "e-store:s9:0",
+        "e-store:s6:0",
+        "e-store:s7:0"
+      ],
+      "scores": {
+        "context_precision": 0.0,
+        "context_recall": 1.0,
+        "answer_relevancy": 0.9999999999999998,
+        "faithfulness": 1.0
+      }
+    },
+    {
+      "question": "How does the e-store system handle configuration conflicts during the product selection process?",
+      "reference": "The system notifies the user about any conflict in the current configuration and allows the user to update the configuration to resolve those conflicts.",
+      "answer": "The e-store system handles configuration conflicts as follows:\n\n- It **notifies the user about any conflict in the current configuration** [e-store:s9:0:3.1.1.5].\n- It **allows the user to update the configuration to resolve the conflict** [e-store:s9:0:3.1.1.6].",
+      "sources": [
+        "e-store:s9:0",
+        "e-store:s7:0",
+        "e-store:s6:0",
+        "e-store:s4:0",
+        "e-store:s3:0"
+      ],
+      "scores": {
+        "context_precision": 0.9999999999,
+        "context_recall": 1.0,
+        "answer_relevancy": 0.9428079715702947,
+        "faithfulness": 1.0
+      }
+    },
+    {
+      "question": "What options are available to a user for customer support within the system?",
+      "reference": "The system provides online help, FAQs, customer support, and sitemap options. Users can select the support type, enter customer and product information, view contact numbers, and request a callback by entering their contact number.",
+      "answer": "The system provides the following customer support options to users:\n\n- Online help (displayed upon request) [e-store:s9:1, e-store:s9:2, e-store:s16:0]\n- FAQs (displayed upon request) [e-store:s9:1, e-store:s9:2]\n- Customer support contact numbers (displayed on-screen) [e-store:s9:1]\n- Selection of support type [e-store:s9:1]\n- Entry of customer and product information for support [e-store:s9:1]\n- Entry of a contact number for support personnel to call [e-store:s9:1, e-store:s9:2]\n- Detailed sitemap (for navigation) [e-store:s9:1, e-store:s18:0]",
+      "sources": [
+        "e-store:s9:1",
+        "e-store:s9:2",
+        "e-store:s9:3",
+        "e-store:s16:0",
+        "e-store:s6:0"
+      ],
+      "scores": {
+        "context_precision": 0.9999999999,
+        "context_recall": 1.0,
+        "answer_relevancy": 0.9816406724624731,
+        "faithfulness": 1.0
+      }
+    }
+  ]
+}

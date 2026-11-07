@@ -149,7 +149,19 @@ End every message by asking the checker to re-evaluate the requirement and to ex
 detail.
 Return only a JSON array with one object per dispute, in this shape (plain strings, a boolean for "valid"):
 [{{"requirement_id": "{example_req}", "valid": true, "message": "the revision request"}}]
+{web_note}{data_note}"""
+
+# Paper 3.3.1, optional web search. Only the query this prompt produces leaves the machine.
+SANITIZE_QUERY = """For each item in <disputes>, write one generic web search query about how the {regulation}
+applies to the issue in dispute, e.g. "GDPR retention limits for biometric data". The query must not contain
+project, product, company, system or person names, requirement ids, or wording copied from the requirement:
+describe the kind of data and processing in general terms, in at most 12 words.
+Return only a JSON object mapping each requirement id to its query, e.g. {{"{example_req}": "the query"}}.
 {data_note}"""
+
+WEB_NOTE = """Some disputes include <web_result> snippets from a public web search. Use them only as background on
+how the articles are applied in practice; the articles take precedence, and the snippets may be wrong.
+"""
 
 RA_COMPILE = """Each item in <requirements> is a requirement that at least one compliance checker flagged, with
 both checkers' final positions and how far they agreed. For each one, decide the final outcome:

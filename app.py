@@ -144,7 +144,13 @@ with trace_tab:  # XAI: every prompt, retrieval and reply of the run, in order
                 st.markdown("**Response**")
                 st.code(t["response"], language=None, wrap_lines=True, height=300)
         else:
-            st.caption(f"{n}. {t['agent']} · {t['requirement_id']}: "
-                       + (f"recalled {len(t['recalled'])} past decision(s): "
-                          + "; ".join(f"{fb['decision']}: {fb['justification']}" for fb in t["recalled"])
-                          if "recalled" in t else f"dropped invented clause ids {t['dropped_clauses']}"))
+            if "recalled" in t:
+                what = f"recalled {len(t['recalled'])} past decision(s): " + "; ".join(
+                    f"{fb['decision']}: {fb['justification']}" for fb in t["recalled"])
+            elif "web_query" in t:
+                what = f'web search "{t["web_query"]}": ' + (
+                    f"blocked, {t['web_blocked']}" if "web_blocked" in t else f"failed, {t['web_error']}"
+                    if "web_error" in t else ", ".join(t["web_results"]) or "no results")
+            else:
+                what = f"dropped invented clause ids {t['dropped_clauses']}"
+            st.caption(f"{n}. {t['agent']} · {t['requirement_id']}: {what}")

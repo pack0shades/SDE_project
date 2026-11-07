@@ -1,0 +1,277 @@
+{
+  "doc": "video-search",
+  "agent": "cc2",
+  "model": "gemini/gemini-3.5-flash-lite",
+  "mode": "advanced",
+  "n": 10,
+  "means": {
+    "context_precision": 0.633,
+    "context_recall": 0.7,
+    "answer_relevancy": 0.619,
+    "faithfulness": 0.9
+  },
+  "questions": [
+    {
+      "question": "Why does the software developer claim their system stays within legal requirements?",
+      "reference": "The system stays within legal requirements because it only lists links for video streams and downloads rather than hosting the videos themselves.",
+      "answer": "Based on the provided sub-answers, the software developer claims their system stays within legal requirements because the software only lists links for video streams and video downloads rather than hosting any videos, which is not illegal [video-search:s22]. Additionally, they recommend that a full legal review of the software should be undertaken before the site is publicly available, which will subject the site to full indemnification of liability [video-search:s22].",
+      "sources": [
+        "video-search:s22",
+        "video-search:s9",
+        "video-search:s19",
+        "video-search:s10",
+        "video-search:s12",
+        "video-search:s22",
+        "video-search:s19",
+        "video-search:s9",
+        "video-search:s12",
+        "video-search:s10",
+        "video-search:s9",
+        "video-search:s22",
+        "video-search:s13",
+        "video-search:s12",
+        "video-search:s19"
+      ],
+      "scores": {
+        "context_precision": 0.9999999999,
+        "context_recall": 1.0,
+        "answer_relevancy": 0.8265158176725087,
+        "faithfulness": 1.0
+      }
+    },
+    {
+      "question": "What is the focus of the 'Other Nonfunctional Requirements' section?",
+      "reference": "This section describes the requirements for the software regarding its interactions with external entities and any associated restrictions.",
+      "answer": "Based on the provided sub-answers, the documents do not contain information about the 'Other Nonfunctional Requirements' section [video-search:s22, video-search:s19, video-search:s9, video-search:s13, video-search:s12]. Therefore, the sub-answers do not cover what the focus of this section is.",
+      "sources": [
+        "video-search:s22",
+        "video-search:s19",
+        "video-search:s9",
+        "video-search:s13",
+        "video-search:s12",
+        "video-search:s22",
+        "video-search:s19",
+        "video-search:s9",
+        "video-search:s12",
+        "video-search:s13",
+        "video-search:s22",
+        "video-search:s19",
+        "video-search:s9",
+        "video-search:s12",
+        "video-search:s13"
+      ],
+      "scores": {
+        "context_precision": 0.0,
+        "context_recall": 0.0,
+        "answer_relevancy": 0.0,
+        "faithfulness": 1.0
+      }
+    },
+    {
+      "question": "Why did the developers choose a single-screen interface design?",
+      "reference": "The developers chose this design because they determined it would be simple to navigate, and their reports indicated that users prefer simpler interfaces.",
+      "answer": "Based on the sub-answers provided above, there is no information explaining why the developers chose a single-screen interface design, as the documentation does not mention the reasons for this decision, its impact on user workflow, or the usability challenges and feedback that led to it.",
+      "sources": [
+        "video-search:s22",
+        "video-search:s4",
+        "video-search:s9",
+        "video-search:s12",
+        "video-search:s13",
+        "video-search:s22",
+        "video-search:s13",
+        "video-search:s4",
+        "video-search:s9",
+        "video-search:s12",
+        "video-search:s4",
+        "video-search:s13",
+        "video-search:s22",
+        "video-search:s12",
+        "video-search:s19"
+      ],
+      "scores": {
+        "context_precision": 0.0,
+        "context_recall": 0.0,
+        "answer_relevancy": 0.0,
+        "faithfulness": 1.0
+      }
+    },
+    {
+      "question": "What legal recommendation is suggested before making the software site available to the public?",
+      "reference": "A full legal review of the software should be undertaken before the site is available to the public to ensure the site is subject to full indemnification of liability.",
+      "answer": "Before the site is available to the public, a recommendation of a full legal review of the software should be undertaken [video-search:s22]. In doing so, the site will be subject to full indemnification of liability [video-search:s22].",
+      "sources": [
+        "video-search:s22",
+        "video-search:s9",
+        "video-search:s16",
+        "video-search:s12",
+        "video-search:s19",
+        "video-search:s22",
+        "video-search:s12",
+        "video-search:s16",
+        "video-search:s19",
+        "video-search:s13",
+        "video-search:s22",
+        "video-search:s16",
+        "video-search:s9",
+        "video-search:s12",
+        "video-search:s19"
+      ],
+      "scores": {
+        "context_precision": 0.9999999999,
+        "context_recall": 1.0,
+        "answer_relevancy": 0.8013981769927025,
+        "faithfulness": 1.0
+      }
+    },
+    {
+      "question": "What operating systems must the system support to be considered portable?",
+      "reference": "The system must work across Microsoft XP, Vista, Mac OS X, and a range of Linux platforms.",
+      "answer": "Based on the provided sub-answers, the operating systems the system must support to be considered portable are Microsoft XP and Vista, Mac OS X, and a range of Linux platforms [video-search:s10].",
+      "sources": [
+        "video-search:s10",
+        "video-search:s16",
+        "video-search:s22",
+        "video-search:s19",
+        "video-search:s12",
+        "video-search:s10",
+        "video-search:s9",
+        "video-search:s19",
+        "video-search:s22",
+        "video-search:s12",
+        "video-search:s10",
+        "video-search:s9",
+        "video-search:s19",
+        "video-search:s13",
+        "video-search:s12"
+      ],
+      "scores": {
+        "context_precision": 0.9999999999,
+        "context_recall": 1.0,
+        "answer_relevancy": 0.9987455360136666,
+        "faithfulness": 0.0
+      }
+    },
+    {
+      "question": "What are the two levels of users defined for the system?",
+      "reference": "The two levels of users are the general user and the system developers.",
+      "answer": "Based on the sub-answers provided, the two levels of users defined for the system are:\n\n1. **General users**: These users utilize the software to find videos and only see the front end of the system [video-search:s9].\n2. **System developers**: These users can edit which sites the system searches based on safety, compatibility, search speed, and usefulness (such as the number of results returned) [video-search:s9].",
+      "sources": [
+        "video-search:s9",
+        "video-search:s22",
+        "video-search:s13",
+        "video-search:s16",
+        "video-search:s12",
+        "video-search:s22",
+        "video-search:s9",
+        "video-search:s16",
+        "video-search:s19",
+        "video-search:s13",
+        "video-search:s9",
+        "video-search:s22",
+        "video-search:s13",
+        "video-search:s12"
+      ],
+      "scores": {
+        "context_precision": 0.9999999999,
+        "context_recall": 1.0,
+        "answer_relevancy": 0.9999999999999998,
+        "faithfulness": 1.0
+      }
+    },
+    {
+      "question": "What is the version number and approval status of the Video Search Engine Software Requirements Specification?",
+      "reference": "The document is Version 1.0 and it is approved.",
+      "answer": "Based on the sub-answers provided, the version number and the approval status of the Video Search Engine Software Requirements Specification are not mentioned, as the passages do not contain this information.",
+      "sources": [
+        "video-search:s4",
+        "video-search:s9",
+        "video-search:s13",
+        "video-search:s19",
+        "video-search:s22",
+        "video-search:s9",
+        "video-search:s19",
+        "video-search:s4",
+        "video-search:s22",
+        "video-search:s13"
+      ],
+      "scores": {
+        "context_precision": 0.0,
+        "context_recall": 0.0,
+        "answer_relevancy": 0.0,
+        "faithfulness": 1.0
+      }
+    },
+    {
+      "question": "Why are torrents with a rating of less than 1 excluded from the results?",
+      "reference": "Torrents with a rating of less than 1 should not be fully trusted, which was a primary complaint from users in William Josephy's ethnographic study.",
+      "answer": "Based on the provided sub-answers, torrents with a rating of less than 1 are excluded because they should not be fully trusted [video-search:s19].",
+      "sources": [
+        "video-search:s19",
+        "video-search:s12",
+        "video-search:s22",
+        "video-search:s19",
+        "video-search:s12",
+        "video-search:s19",
+        "video-search:s12",
+        "video-search:s22"
+      ],
+      "scores": {
+        "context_precision": 0.9999999999,
+        "context_recall": 1.0,
+        "answer_relevancy": 0.9792920551198789,
+        "faithfulness": 1.0
+      }
+    },
+    {
+      "question": "What feature allows users to revisit specific videos later?",
+      "reference": "The system provides a facility for users to store their favorite videos so they can access them at another time.",
+      "answer": "The \"favorite\u2019s option\" available in the menu bar allows users to store links to their favorite videos in the software so they can come back to them at another time and go back to their favorite websites/videos after restarting the software [video-search:s8, video-search:s22 Appendix B, item 1].",
+      "sources": [
+        "video-search:s8",
+        "video-search:s22",
+        "video-search:s4",
+        "video-search:s13",
+        "video-search:s8",
+        "video-search:s22",
+        "video-search:s13",
+        "video-search:s8",
+        "video-search:s22",
+        "video-search:s13",
+        "video-search:s19"
+      ],
+      "scores": {
+        "context_precision": 0.99999999995,
+        "context_recall": 1.0,
+        "answer_relevancy": 0.6037628334322794,
+        "faithfulness": 1.0
+      }
+    },
+    {
+      "question": "What technical requirement is necessary for the Video Searching software to function?",
+      "reference": "The system requires an active internet connection to search multiple websites for streaming videos or torrents.",
+      "answer": "Based on the previous answers, the technical requirements necessary for the Video Searching software to function are:\n\n* A reasonably up-to-date computer connected to the internet via a modem [video-search:s10].\n* An operating system such as Microsoft XP or Vista, Mac OS X, or a range of Linux platforms [video-search:s10].\n* A web browser such as Internet Explorer, Firefox, or Safari [video-search:s10]. \n\nThe provided sub-answers do not specify exact bandwidth, speed, or other detailed network specifications beyond requiring an internet connection via a modem.",
+      "sources": [
+        "video-search:s10",
+        "video-search:s19",
+        "video-search:s4",
+        "video-search:s9",
+        "video-search:s13",
+        "video-search:s10",
+        "video-search:s9",
+        "video-search:s22",
+        "video-search:s4",
+        "video-search:s13",
+        "video-search:s4",
+        "video-search:s10",
+        "video-search:s13",
+        "video-search:s19"
+      ],
+      "scores": {
+        "context_precision": 0.3333333333,
+        "context_recall": 1.0,
+        "answer_relevancy": 0.9828386883719167,
+        "faithfulness": 1.0
+      }
+    }
+  ]
+}

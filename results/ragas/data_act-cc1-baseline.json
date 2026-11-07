@@ -1,0 +1,195 @@
+{
+  "doc": "data_act",
+  "agent": "cc1",
+  "model": "mistral/ministral-14b-latest",
+  "mode": "baseline",
+  "n": 10,
+  "means": {
+    "context_precision": 0.687,
+    "context_recall": 0.9,
+    "answer_relevancy": 0.822,
+    "faithfulness": 0.884
+  },
+  "questions": [
+    {
+      "question": "Are data holders required to charge for data provided in response to a public emergency under Article 15(1), point (a)?",
+      "reference": "No, data holders other than microenterprises and small enterprises must make such data available free of charge.",
+      "answer": "No, data holders are **not required to charge** for data provided in response to a public emergency under **Article 15(1), point (a)**. The relevant provision states that such data must be made available **free of charge** ([data_act:art20:0], paragraph 1).",
+      "sources": [
+        "data_act:art20:0",
+        "data_act:art15:0",
+        "data_act:art18:0",
+        "data_act:art17:0",
+        "data_act:art14:0"
+      ],
+      "scores": {
+        "context_precision": 0.9999999999,
+        "context_recall": 1.0,
+        "answer_relevancy": 1.0,
+        "faithfulness": 1.0
+      }
+    },
+    {
+      "question": "What information must a related service provider disclose to a user regarding the sharing of data with third parties?",
+      "reference": "The provider must disclose whether it intends to allow third parties to use the data for purposes agreed upon with the user, and explain how the user can request that data be shared with a third party or end such data sharing.",
+      "answer": "The provided passages do **not** explicitly address the disclosure requirements for a **related service provider** regarding the sharing of data with third parties.\n\nThe closest relevant provisions are:\n- **[data_act:art5:2]** (which pertains to data sharing with third parties but focuses on legal bases, trade secrets, and confidentiality measures rather than disclosure obligations).\n- **[data_act:art3:0]** (which mandates pre-contractual transparency on data collection, storage, and access but does not cover third-party sharing).\n\nIf the question requires **specific disclosure obligations for third-party sharing**, the context does not provide them.",
+      "sources": [
+        "data_act:art4:0",
+        "data_act:art3:0",
+        "data_act:art28:0",
+        "data_act:art32:0",
+        "data_act:art5:2"
+      ],
+      "scores": {
+        "context_precision": 0.0,
+        "context_recall": 0.0,
+        "answer_relevancy": 0.0,
+        "faithfulness": 0.2857142857142857
+      }
+    },
+    {
+      "question": "What types of obstacles are providers of data processing services required to remove to facilitate customer switching?",
+      "reference": "Providers must remove pre-commercial, commercial, technical, contractual, and organisational obstacles that inhibit customers from switching services or providers.",
+      "answer": "Providers of data processing services are required to remove or not impose the following types of obstacles to facilitate customer switching, as outlined in **[data_act:art23:0]**:\n\n- **Pre-commercial** obstacles\n- **Commercial** obstacles\n- **Technical** obstacles\n- **Contractual** obstacles\n- **Organisational** obstacles\n\nThese obstacles inhibit customers from:\n- Terminating contracts (after notice and switching completion) **[data_act:art23:0(a)]**\n- Concluding new contracts with alternative providers **[data_act:art23:0(b)]**\n- Porting exportable data/digital assets **[data_act:art23:0(c)]**\n- Achieving functional equivalence in the new service **[data_act:art23:0(d)]**\n- Unbundling technically feasible services **[data_act:art23:0(e)]**.",
+      "sources": [
+        "data_act:art23:0",
+        "data_act:art30:0",
+        "data_act:art29:0",
+        "data_act:art25:0",
+        "data_act:art2:5"
+      ],
+      "scores": {
+        "context_precision": 0.9999999999,
+        "context_recall": 1.0,
+        "answer_relevancy": 0.9516055418616041,
+        "faithfulness": 1.0
+      }
+    },
+    {
+      "question": "What regulatory requirement must open interoperability specifications comply with according to Article 35?",
+      "reference": "Open interoperability specifications must comply with Annex II to Regulation (EU) No 1025/2012.",
+      "answer": "According to **[data_act:art35:0]** and **[data_act:art35:1]**, open interoperability specifications must comply with **Annex II to Regulation (EU) No 1025/2012**. Additionally, they must satisfy the essential requirements laid down in **[data_act:art35:1]** (e.g., portability, interoperability, security, and innovation support) and address the technical aspects outlined in **[data_act:art35:0]** (e.g., cloud interoperability, data portability, and application portability).",
+      "sources": [
+        "data_act:art35:1",
+        "data_act:art30:1",
+        "data_act:art35:0",
+        "data_act:art33:4",
+        "data_act:art35:2"
+      ],
+      "scores": {
+        "context_precision": 0.8333333332916666,
+        "context_recall": 1.0,
+        "answer_relevancy": 0.7885595566637913,
+        "faithfulness": 1.0
+      }
+    },
+    {
+      "question": "Are microenterprises and small enterprises eligible to claim compensation for making data available under Article 15(1), point (b)?",
+      "reference": "Yes, the provisions for fair compensation apply to microenterprises and small enterprises when they claim compensation for making data available.",
+      "answer": "No, microenterprises and small enterprises are **not** eligible to claim compensation for making data available under **Article 15(1), point (b)** in general, as explicitly stated in **[data_act:art15:1]**.\n\nHowever, they **are** eligible to claim compensation under **Article 20(2)** (which mirrors the general rule for other data holders) **if they request it** ([data_act:art20:0], para. 3). This means the right to compensation exists but is not automatically applicable unless claimed.",
+      "sources": [
+        "data_act:art20:0",
+        "data_act:art15:1",
+        "data_act:art9:0",
+        "data_act:art7:0",
+        "data_act:art2:3"
+      ],
+      "scores": {
+        "context_precision": 0.9999999999,
+        "context_recall": 1.0,
+        "answer_relevancy": 0.9999999999999999,
+        "faithfulness": 0.6666666666666666
+      }
+    },
+    {
+      "question": "What is the purpose of the monitoring mechanism the Commission is empowered to establish regarding switching charges?",
+      "reference": "The monitoring mechanism is intended to ensure that the withdrawal and reduction of switching charges are achieved in accordance with the deadlines established in the regulation.",
+      "answer": "The purpose of the monitoring mechanism is to ensure that the **withdrawal and reduction of switching charges** by providers of data processing services are attained in accordance with the deadlines laid down in [data_act:art29:1] and [data_act:art29:0]. Specifically, it verifies compliance with:\n\n- The **full prohibition of switching charges from 12 January 2027** ([data_act:art29:0:1]).\n- The **reduced switching charges (limited to directly linked costs) between 11 January 2024 and 12 January 2027** ([data_act:art29:0:2\u20133]).",
+      "sources": [
+        "data_act:art29:1",
+        "data_act:art29:0",
+        "data_act:art37:3",
+        "data_act:art2:6",
+        "data_act:art25:0"
+      ],
+      "scores": {
+        "context_precision": 0.9999999999,
+        "context_recall": 1.0,
+        "answer_relevancy": 0.8502597944827,
+        "faithfulness": 1.0
+      }
+    },
+    {
+      "question": "What information must providers disclose to prospective customers before entering into a contract?",
+      "reference": "Providers must provide clear information regarding standard service fees, early termination penalties, and any reduced switching charges that may be imposed between 11 January 2024 and 12 January 2027.",
+      "answer": "The passages in the provided context require providers of data processing services to disclose the following information to **prospective customers** before entering into a contract:\n\n1. **Standard service fees and early termination penalties** ([data_act:art29:4]).\n2. **Reduced switching charges** (if applicable during the transitional period from 11 January 2024 to 12 January 2027) ([data_act:art29:4]).\n3. **Information on data processing services involving highly complex or costly switching** (where relevant) ([data_act:art29:5]).\n\nFor **connected products and related services**, additional pre-contractual disclosures are required under [data_act:art3:2] and [data_act:art3:3], but these apply to sellers/rentors/lessors or service providers, not specifically to data processing service providers.\n\nNo other pre-contractual disclosure obligations for prospective customers are specified in the provided context.",
+      "sources": [
+        "data_act:art28:0",
+        "data_act:art25:0",
+        "data_act:art3:0",
+        "data_act:art26:0",
+        "data_act:art29:0"
+      ],
+      "scores": {
+        "context_precision": 0.19999999998,
+        "context_recall": 1.0,
+        "answer_relevancy": 0.8587172158084719,
+        "faithfulness": 0.8888888888888888
+      }
+    },
+    {
+      "question": "What action must the Commission take if a harmonised standard is published that covers the same requirements as an existing implementing act?",
+      "reference": "If a harmonised standard is published in the Official Journal of the European Union, the Commission must repeal the implementing acts, or parts thereof, that cover the same essential requirements as those addressed by the harmonised standard.",
+      "answer": "The Commission must **repeal the implementing act (or parts thereof) that cover the same essential requirements** as the newly published harmonised standard [data_act:art33:4].",
+      "sources": [
+        "data_act:art36:2",
+        "data_act:art33:2",
+        "data_act:art33:4",
+        "data_act:art35:2",
+        "data_act:art35:1"
+      ],
+      "scores": {
+        "context_precision": 0.3333333333,
+        "context_recall": 1.0,
+        "answer_relevancy": 0.9776511365061078,
+        "faithfulness": 1.0
+      }
+    },
+    {
+      "question": "What must a data processing service provider include in their online register to fulfill their information obligations?",
+      "reference": "The online register must contain details of all data structures, data formats, relevant standards, and open interoperability specifications in which exportable data is available.",
+      "answer": "The provider of data processing services must include in their online register the following details to fulfill their information obligations:\n\n- **All data structures and data formats** used for exportable data (as referred to in [data_act:art25:0](2)(e)).\n- **Relevant standards and open interoperability specifications** applicable to those data structures and formats ([data_act:art26:0](b)).\n\nAdditionally, the register must be kept up-to-date in accordance with obligations under [data_act:art30:1](4) and [data_act:art30:1](3).",
+      "sources": [
+        "data_act:art28:0",
+        "data_act:art26:0",
+        "data_act:art25:0",
+        "data_act:art30:1",
+        "data_act:art30:2"
+      ],
+      "scores": {
+        "context_precision": 0.49999999995,
+        "context_recall": 1.0,
+        "answer_relevancy": 0.9870950127047101,
+        "faithfulness": 1.0
+      }
+    },
+    {
+      "question": "What specific information regarding ICT infrastructure must data processing service providers publish on their websites?",
+      "reference": "Providers must publish the jurisdiction to which the ICT infrastructure deployed for the data processing of their individual services is subject.",
+      "answer": "The specific information that data processing service providers must publish on their websites, as per **[data_act:art28:0]**, includes:\n\n1. The **jurisdiction** to which their ICT infrastructure is subject.\n2. A **general description** of the **technical, organisational, and contractual measures** adopted to prevent international governmental access to or transfer of non-personal data held in the Union, where such access or transfer would conflict with Union or Member State law.",
+      "sources": [
+        "data_act:art28:0",
+        "data_act:art30:0",
+        "data_act:art25:0",
+        "data_act:art30:2",
+        "data_act:art2:6"
+      ],
+      "scores": {
+        "context_precision": 0.9999999999,
+        "context_recall": 1.0,
+        "answer_relevancy": 0.8053841160879436,
+        "faithfulness": 1.0
+      }
+    }
+  ]
+}

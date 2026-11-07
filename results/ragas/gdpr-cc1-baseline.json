@@ -1,0 +1,195 @@
+{
+  "doc": "gdpr",
+  "agent": "cc1",
+  "model": "mistral/ministral-14b-latest",
+  "mode": "baseline",
+  "n": 10,
+  "means": {
+    "context_precision": 0.822,
+    "context_recall": 0.9,
+    "answer_relevancy": 0.782,
+    "faithfulness": 0.798
+  },
+  "questions": [
+    {
+      "question": "What legal sources must establish the basis for processing that is necessary for compliance with a legal obligation or for a task carried out in the public interest?",
+      "reference": "The basis for such processing must be laid down by either Union law or the Member State law to which the controller is subject.",
+      "answer": "The basis for processing under **Article 6(1)(c)** (compliance with a legal obligation) and **Article 6(1)(e)** (public interest/task in exercise of official authority) must be established by:\n\n- **Union law** ([gdpr:art6:1]), or\n- **Member State law** to which the controller is subject ([gdpr:art6:1]).\n\nThe legal basis must also determine the **purpose of processing** (or, for point (e), ensure it is necessary for the public interest task) and may include specific provisions like data types, recipients, purpose limitations, storage periods, and safeguards ([gdpr:art6:1]). The law must be **proportionate** and meet an objective of public interest ([gdpr:art6:1], [gdpr:art6:2]).",
+      "sources": [
+        "gdpr:art6:1",
+        "gdpr:art9:2",
+        "gdpr:art6:0",
+        "gdpr:art6:2",
+        "gdpr:art21:1"
+      ],
+      "scores": {
+        "context_precision": 0.9166666666361111,
+        "context_recall": 1.0,
+        "answer_relevancy": 0.7349932319402284,
+        "faithfulness": 0.7142857142857143
+      }
+    },
+    {
+      "question": "Under what condition can a judgment from a third-country court requiring a data transfer be recognized or enforced?",
+      "reference": "Such a judgment can only be recognized or enforced if it is based on an international agreement, such as a mutual legal assistance treaty, that is in force between the requesting third country and the Union or a Member State.",
+      "answer": "Under the GDPR, a judgment of a court or tribunal in a third country requiring a transfer or disclosure of personal data may only be recognized or enforced if it is based on an **international agreement** (e.g., a mutual legal assistance treaty) in force between the requesting third country and the **Union or a Member State** [gdpr:art48:0]. No other conditions are specified in the provided passages.",
+      "sources": [
+        "gdpr:art48:0",
+        "gdpr:art45:0",
+        "gdpr:art46:0",
+        "gdpr:art49:0",
+        "gdpr:art44:0"
+      ],
+      "scores": {
+        "context_precision": 0.9999999999,
+        "context_recall": 1.0,
+        "answer_relevancy": 0.9231819589180152,
+        "faithfulness": 0.6666666666666666
+      }
+    },
+    {
+      "question": "What specific aspects regarding the establishment of a supervisory authority must each Member State provide for by law?",
+      "reference": "Each Member State must provide by law for the establishment of the authority, the qualifications and eligibility for members, appointment rules and procedures, the duration of terms, rules on reappointment eligibility, and conditions governing obligations, prohibitions, and cessation of employment for members and staff.",
+      "answer": "The passages in the provided context specify that each Member State must provide for the following aspects regarding the establishment of a supervisory authority by law:\n\n1. **Establishment of the supervisory authority** ([gdpr:art51:0]).\n2. **Qualifications and eligibility conditions for members** ([gdpr:art54:0(a)]).\n3. **Rules and procedures for the appointment of members** ([gdpr:art54:0(c)]).\n4. **Duration of the term of office (minimum 4 years, with exceptions for staggered appointments)** ([gdpr:art54:0(d)]).\n5. **Eligibility for reappointment** ([gdpr:art54:0(e)]).\n6. **Conditions governing obligations, prohibitions, and cessation of employment for members and staff** ([gdpr:art54:0(f)]).\n7. **Duty of professional secrecy for members and staff** ([gdpr:art54:0(2)]).\n8. **Transparent appointment procedure (by parliament, government, head of state, or independent body)** ([gdpr:art53:0(1)]).\n9. **Qualifications, experience, and skills required for members** ([gdpr:art53:0(2)]).\n10. **Conditions for dismissal of members (serious misconduct or failure to meet required conditions)** ([gdpr:art53:0(4)]).\n11. **Independence of the supervisory authority and its members** ([gdpr:art52:0(1-3)]).\n12. **Resources (human, technical, financial, premises, and infrastructure) for effective performance** ([gdpr:art52:0(4)]).\n13. **Exclusive direction of staff by the supervisory authority** ([gdpr:art52:0(5)]).\n14. **Financial control without compromising independence and separate public budgets** ([gdpr:art52:0(6)]).",
+      "sources": [
+        "gdpr:art54:0",
+        "gdpr:art53:0",
+        "gdpr:art51:0",
+        "gdpr:art52:0",
+        "gdpr:art90:0"
+      ],
+      "scores": {
+        "context_precision": 0.9999999999,
+        "context_recall": 1.0,
+        "answer_relevancy": 0.9124845457345802,
+        "faithfulness": 1.0
+      }
+    },
+    {
+      "question": "Are public authorities and bodies subject to the provisions of Article 41 regarding the monitoring of approved codes of conduct?",
+      "reference": "No, Article 41 does not apply to processing carried out by public authorities and bodies.",
+      "answer": "The provided passages do **not** explicitly address whether **public authorities and bodies** are subject to the provisions of **Article 41** regarding the monitoring of approved codes of conduct.\n\nThe relevant text in **[gdpr:art41:0]** and **[gdpr:art40:1]** focuses on:\n- The accreditation and role of **private bodies** (e.g., associations, certification bodies) in monitoring compliance with codes of conduct.\n- The **controllers or processors** (typically private entities) that may adhere to codes of conduct.\n\nThere is **no mention** of public authorities or bodies being subject to Article 41\u2019s monitoring requirements. Thus, the answer cannot be derived from the given context.",
+      "sources": [
+        "gdpr:art57:1",
+        "gdpr:art41:0",
+        "gdpr:art57:2",
+        "gdpr:art40:1",
+        "gdpr:art83:2"
+      ],
+      "scores": {
+        "context_precision": 0.0,
+        "context_recall": 0.0,
+        "answer_relevancy": 0.0,
+        "faithfulness": 0.42857142857142855
+      }
+    },
+    {
+      "question": "What responsibility do Member States have regarding the resources of a supervisory authority?",
+      "reference": "Member States must ensure that each supervisory authority is provided with the necessary human, technical, and financial resources, as well as the premises and infrastructure required to effectively perform its tasks and exercise its powers.",
+      "answer": "Member States must ensure that each supervisory authority is provided with the **human, technical and financial resources, premises and infrastructure necessary** for the effective performance of its tasks and powers, including those related to mutual assistance, cooperation, and participation in the Board [gdpr:art52:0].",
+      "sources": [
+        "gdpr:art52:0",
+        "gdpr:art51:0",
+        "gdpr:art62:0",
+        "gdpr:art53:0",
+        "gdpr:art55:0"
+      ],
+      "scores": {
+        "context_precision": 0.9999999999,
+        "context_recall": 1.0,
+        "answer_relevancy": 0.876638330836734,
+        "faithfulness": 1.0
+      }
+    },
+    {
+      "question": "To what specific type of reporting does the duty of professional secrecy apply during the term of office for supervisory authority members?",
+      "reference": "During their term of office, the duty of professional secrecy applies in particular to the reporting by natural persons of infringements of this Regulation.",
+      "answer": "The duty of professional secrecy applies **in particular to reporting by natural persons of infringements of the GDPR** during the term of office of supervisory authority members [gdpr:art54:1, gdpr:art54:0].",
+      "sources": [
+        "gdpr:art54:1",
+        "gdpr:art54:0",
+        "gdpr:art90:0",
+        "gdpr:art59:0",
+        "gdpr:art14:3"
+      ],
+      "scores": {
+        "context_precision": 0.9999999999,
+        "context_recall": 1.0,
+        "answer_relevancy": 0.7275927667245327,
+        "faithfulness": 1.0
+      }
+    },
+    {
+      "question": "What is the maximum duration for provisional measures adopted under the urgency procedure?",
+      "reference": "Provisional measures adopted under the urgency procedure must have a specified period of validity that does not exceed three months.",
+      "answer": "The maximum duration for provisional measures adopted under the urgency procedure is **three months**, as specified in [gdpr:art66:0].",
+      "sources": [
+        "gdpr:art66:0",
+        "gdpr:art62:2",
+        "gdpr:art64:1",
+        "gdpr:art92:0",
+        "gdpr:art70:1"
+      ],
+      "scores": {
+        "context_precision": 0.9999999999,
+        "context_recall": 1.0,
+        "answer_relevancy": 1.0,
+        "faithfulness": 0.5
+      }
+    },
+    {
+      "question": "Who is generally competent to act as the lead supervisory authority for cross-border processing?",
+      "reference": "The supervisory authority of the main establishment or of the single establishment of the controller or processor is competent to act as the lead supervisory authority.",
+      "answer": "The lead supervisory authority for cross-border processing is generally the supervisory authority of the **main establishment or the single establishment of the controller or processor**, as specified in [gdpr:art56:0:1].",
+      "sources": [
+        "gdpr:art56:0",
+        "gdpr:art55:0",
+        "gdpr:art56:1",
+        "gdpr:art51:0",
+        "gdpr:art62:0"
+      ],
+      "scores": {
+        "context_precision": 0.9999999999,
+        "context_recall": 1.0,
+        "answer_relevancy": 0.8844562181712508,
+        "faithfulness": 1.0
+      }
+    },
+    {
+      "question": "What is the timeframe for a lead supervisory authority to decide whether to handle a case referred to it by another supervisory authority?",
+      "reference": "The lead supervisory authority must decide whether or not it will handle the case within a period of three weeks after being informed.",
+      "answer": "The timeframe is **three weeks** after being informed by the supervisory authority, as stated in [gdpr:art56:0] paragraph 3.",
+      "sources": [
+        "gdpr:art56:1",
+        "gdpr:art56:0",
+        "gdpr:art60:0",
+        "gdpr:art65:1",
+        "gdpr:art60:2"
+      ],
+      "scores": {
+        "context_precision": 0.49999999995,
+        "context_recall": 1.0,
+        "answer_relevancy": 0.7600413934281889,
+        "faithfulness": 0.6666666666666666
+      }
+    },
+    {
+      "question": "Under what conditions can a supervisory authority adopt provisional measures under the urgency procedure?",
+      "reference": "A supervisory authority may adopt provisional measures in exceptional circumstances where there is an urgent need to act to protect the rights and freedoms of data subjects.",
+      "answer": "Under the urgency procedure, a supervisory authority may adopt **provisional measures** in the following conditions, as outlined in the provided passages:\n\n1. **Exceptional circumstances** where there is an **urgent need to act** to protect the **rights and freedoms of data subjects** ([gdpr:art66:0]).\n2. The provisional measures must be **limited to its own territory** and have a **specified validity period not exceeding three months** ([gdpr:art66:0]).\n3. The supervisory authority must **communicate the measures and reasons** to other supervisory authorities, the Board, and the Commission **without delay** ([gdpr:art66:0]).\n\nAdditionally, if another supervisory authority adopts a provisional measure under **Article 55** (e.g., in response to a complaint), the **urgent need to act under Article 66(1)** is **presumed to be met**, and the Board may be requested for an **urgent opinion or binding decision** ([gdpr:art62:2]).\n\nThe urgency procedure also applies if a **lead supervisory authority or another supervisory authority** determines there is an **exceptional need to act** to protect data subjects ([gdpr:art60:11]).",
+      "sources": [
+        "gdpr:art66:0",
+        "gdpr:art62:2",
+        "gdpr:art60:3",
+        "gdpr:art60:2",
+        "gdpr:art65:1"
+      ],
+      "scores": {
+        "context_precision": 0.8055555555287036,
+        "context_recall": 1.0,
+        "answer_relevancy": 0.9962523809089877,
+        "faithfulness": 1.0
+      }
+    }
+  ]
+}

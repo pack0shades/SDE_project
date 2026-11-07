@@ -1,0 +1,289 @@
+{
+  "doc": "data_act",
+  "agent": "cc2",
+  "model": "gemini/gemini-3.5-flash-lite",
+  "mode": "advanced",
+  "n": 10,
+  "means": {
+    "context_precision": 0.8,
+    "context_recall": 1.0,
+    "answer_relevancy": 0.899,
+    "faithfulness": 1.0
+  },
+  "questions": [
+    {
+      "question": "Are data holders required to charge for data provided in response to a public emergency under Article 15(1), point (a)?",
+      "reference": "No, data holders other than microenterprises and small enterprises must make such data available free of charge.",
+      "answer": "Based on the provided sub-answers, data holders other than microenterprises and small enterprises are required to make data necessary to respond to a public emergency pursuant to Article 15(1), point (a), available free of charge [data_act:art20]. Therefore, they are not required to charge for it [data_act:art20].",
+      "sources": [
+        "data_act:art17",
+        "data_act:art20",
+        "data_act:art49",
+        "data_act:art2",
+        "data_act:art37",
+        "data_act:art20",
+        "data_act:art18",
+        "data_act:art14",
+        "data_act:art4",
+        "data_act:art37",
+        "data_act:art10",
+        "data_act:art20",
+        "data_act:art17",
+        "data_act:art19",
+        "data_act:art4"
+      ],
+      "scores": {
+        "context_precision": 0.49999999995,
+        "context_recall": 1.0,
+        "answer_relevancy": 0.8892063650527029,
+        "faithfulness": 1.0
+      }
+    },
+    {
+      "question": "What information must a related service provider disclose to a user regarding the sharing of data with third parties?",
+      "reference": "The provider must disclose whether it intends to allow third parties to use the data for purposes agreed upon with the user, and explain how the user can request that data be shared with a third party or end such data sharing.",
+      "answer": "Based on the sub-answers provided, a related service provider must disclose the following information regarding the sharing of data with third parties:\n\n* Whether the provider intends to allow one or more third parties to use readily available data for purposes agreed upon with the user [data_act:art3(3)(c)].\n* How the user can request that data are shared with a third party and how to end that data sharing [data_act:art3(3)(f)].",
+      "sources": [
+        "data_act:art3",
+        "data_act:art11",
+        "data_act:art6",
+        "data_act:art4",
+        "data_act:art5",
+        "data_act:art21",
+        "data_act:art3",
+        "data_act:art5",
+        "data_act:art3",
+        "data_act:art6",
+        "data_act:art11",
+        "data_act:art5",
+        "data_act:art4"
+      ],
+      "scores": {
+        "context_precision": 0.9999999999,
+        "context_recall": 1.0,
+        "answer_relevancy": 0.9874743069522791,
+        "faithfulness": 1.0
+      }
+    },
+    {
+      "question": "What types of obstacles are providers of data processing services required to remove to facilitate customer switching?",
+      "reference": "Providers must remove pre-commercial, commercial, technical, contractual, and organisational obstacles that inhibit customers from switching services or providers.",
+      "answer": "Based on the sub-answers provided, providers of data processing services are required to remove pre-commercial, commercial, technical, contractual, and organisational obstacles that inhibit customers from performing switching and related actions [data_act:art23].",
+      "sources": [
+        "data_act:art23",
+        "data_act:art29",
+        "data_act:art2",
+        "data_act:art25",
+        "data_act:art26",
+        "data_act:art23",
+        "data_act:art30",
+        "data_act:art2",
+        "data_act:art25",
+        "data_act:art29",
+        "data_act:art23",
+        "data_act:art30",
+        "data_act:art25",
+        "data_act:art2",
+        "data_act:art29",
+        "data_act:art23",
+        "data_act:art30",
+        "data_act:art25",
+        "data_act:art2",
+        "data_act:art29"
+      ],
+      "scores": {
+        "context_precision": 0.9999999999,
+        "context_recall": 1.0,
+        "answer_relevancy": 0.9398576683684928,
+        "faithfulness": 1.0
+      }
+    },
+    {
+      "question": "What regulatory requirement must open interoperability specifications comply with according to Article 35?",
+      "reference": "Open interoperability specifications must comply with Annex II to Regulation (EU) No 1025/2012.",
+      "answer": "According to Article 35, open interoperability specifications must comply with Annex II to Regulation (EU) No 1025/2012 [data_act:art35(3)].",
+      "sources": [
+        "data_act:art30",
+        "data_act:art35",
+        "data_act:art26",
+        "data_act:art2",
+        "data_act:art47",
+        "data_act:art30",
+        "data_act:art33",
+        "data_act:art2",
+        "data_act:art42",
+        "data_act:art37",
+        "data_act:art30",
+        "data_act:art35",
+        "data_act:art26",
+        "data_act:art33",
+        "data_act:art34"
+      ],
+      "scores": {
+        "context_precision": 0.49999999995,
+        "context_recall": 1.0,
+        "answer_relevancy": 0.9408874145963996,
+        "faithfulness": 1.0
+      }
+    },
+    {
+      "question": "Are microenterprises and small enterprises eligible to claim compensation for making data available under Article 15(1), point (b)?",
+      "reference": "Yes, the provisions for fair compensation apply to microenterprises and small enterprises when they claim compensation for making data available.",
+      "answer": "Yes, microenterprises and small enterprises are eligible to claim compensation for making data available under Article 15(1), point (b), as paragraph 3 of Article 20 states that paragraph 2 (which entitles the data holder to fair compensation for making data available in compliance with such a request) also applies when a microenterprise and small enterprise claims compensation [data_act:art20].",
+      "sources": [
+        "data_act:art20",
+        "data_act:art17",
+        "data_act:art19",
+        "data_act:art11",
+        "data_act:art20",
+        "data_act:art7",
+        "data_act:art9",
+        "data_act:art15",
+        "data_act:art49",
+        "data_act:art20",
+        "data_act:art10",
+        "data_act:art14",
+        "data_act:art19",
+        "data_act:art4"
+      ],
+      "scores": {
+        "context_precision": 0.9999999999,
+        "context_recall": 1.0,
+        "answer_relevancy": 0.9999999999999999,
+        "faithfulness": 1.0
+      }
+    },
+    {
+      "question": "What is the purpose of the monitoring mechanism the Commission is empowered to establish regarding switching charges?",
+      "reference": "The monitoring mechanism is intended to ensure that the withdrawal and reduction of switching charges are achieved in accordance with the deadlines established in the regulation.",
+      "answer": "Based on the sub-answers provided, the purpose of the monitoring mechanism is to monitor switching charges imposed by providers of data processing services on the market in order to ensure that the withdrawal and reduction of these charges are attained in accordance with the specified deadlines [data_act:art29].",
+      "sources": [
+        "data_act:art29",
+        "data_act:art2",
+        "data_act:art37",
+        "data_act:art25",
+        "data_act:art26",
+        "data_act:art29",
+        "data_act:art37",
+        "data_act:art17",
+        "data_act:art11",
+        "data_act:art19",
+        "data_act:art29",
+        "data_act:art49",
+        "data_act:art2",
+        "data_act:art25",
+        "data_act:art17"
+      ],
+      "scores": {
+        "context_precision": 0.9999999999,
+        "context_recall": 1.0,
+        "answer_relevancy": 0.6908870354599489,
+        "faithfulness": 1.0
+      }
+    },
+    {
+      "question": "What information must providers disclose to prospective customers before entering into a contract?",
+      "reference": "Providers must provide clear information regarding standard service fees, early termination penalties, and any reduced switching charges that may be imposed between 11 January 2024 and 12 January 2027.",
+      "answer": "Based on the sub-answers provided above, before entering into a contract, providers must disclose:\n* Standard service fees and early termination penalties that might be imposed [data_act:art29].\n* Reduced switching charges that might be imposed during the timeframe from 11 January 2024 to 12 January 2027 [data_act:art29].\n* Where relevant, data processing services that involve highly complex or costly switching or for which switching is impossible without significant interference in the data, digital assets, or service architecture [data_act:art29].",
+      "sources": [
+        "data_act:art29",
+        "data_act:art3",
+        "data_act:art29",
+        "data_act:art3",
+        "data_act:art10",
+        "data_act:art29",
+        "data_act:art3",
+        "data_act:art25"
+      ],
+      "scores": {
+        "context_precision": 0.9999999999,
+        "context_recall": 1.0,
+        "answer_relevancy": 0.914907858481346,
+        "faithfulness": 1.0
+      }
+    },
+    {
+      "question": "What action must the Commission take if a harmonised standard is published that covers the same requirements as an existing implementing act?",
+      "reference": "If a harmonised standard is published in the Official Journal of the European Union, the Commission must repeal the implementing acts, or parts thereof, that cover the same essential requirements as those addressed by the harmonised standard.",
+      "answer": "Based on the previous answers, when the reference of a harmonised standard covering the relevant essential requirements is published in the Official Journal of the European Union, the Commission shall assess the harmonised standard in accordance with Regulation (EU) No 1025/2012 and shall repeal the implementing acts (or parts thereof) that cover the same essential requirements [data_act:art33_9, data_act:art36_10].",
+      "sources": [
+        "data_act:art33",
+        "data_act:art35",
+        "data_act:art2",
+        "data_act:art36",
+        "data_act:art1",
+        "data_act:art36",
+        "data_act:art33",
+        "data_act:art35",
+        "data_act:art42",
+        "data_act:art36",
+        "data_act:art33",
+        "data_act:art35",
+        "data_act:art30"
+      ],
+      "scores": {
+        "context_precision": 0.7499999999625,
+        "context_recall": 1.0,
+        "answer_relevancy": 0.7758276751708573,
+        "faithfulness": 1.0
+      }
+    },
+    {
+      "question": "What must a data processing service provider include in their online register to fulfill their information obligations?",
+      "reference": "The online register must contain details of all data structures, data formats, relevant standards, and open interoperability specifications in which exportable data is available.",
+      "answer": "To fulfill their information obligations, a data processing service provider must include in their online register details of all data structures, data formats, relevant standards, and open interoperability specifications in which exportable data are available [data_act:art26]. \n\nThe provided sub-answers do not contain information regarding specific company and contact details, regulatory compliance, certification, data protection information, dispute resolution details, or supervisory authority details that must be included in the register.",
+      "sources": [
+        "data_act:art26",
+        "data_act:art30",
+        "data_act:art10",
+        "data_act:art1",
+        "data_act:art28",
+        "data_act:art30",
+        "data_act:art26",
+        "data_act:art21",
+        "data_act:art3",
+        "data_act:art25",
+        "data_act:art21",
+        "data_act:art36",
+        "data_act:art11",
+        "data_act:art26",
+        "data_act:art25",
+        "data_act:art10"
+      ],
+      "scores": {
+        "context_precision": 0.9999999999,
+        "context_recall": 1.0,
+        "answer_relevancy": 0.856373761988127,
+        "faithfulness": 1.0
+      }
+    },
+    {
+      "question": "What specific information regarding ICT infrastructure must data processing service providers publish on their websites?",
+      "reference": "Providers must publish the jurisdiction to which the ICT infrastructure deployed for the data processing of their individual services is subject.",
+      "answer": "Based on the sub-answers provided above, data processing service providers must publish the following specific information regarding their ICT infrastructure on their websites:\n\n1. The jurisdiction to which the ICT infrastructure deployed for the processing of their individual services is subject [data_act:art28].\n2. A general description of the technical, organisational, and contractual measures taken to prevent international governmental access to, or transfer of, non-personal data held in the Union where such access or transfer would conflict with Union law or the national law of the relevant Member State [data_act:art28].",
+      "sources": [
+        "data_act:art30",
+        "data_act:art1",
+        "data_act:art2",
+        "data_act:art28",
+        "data_act:art26",
+        "data_act:art28",
+        "data_act:art29",
+        "data_act:art30",
+        "data_act:art25",
+        "data_act:art26",
+        "data_act:art30",
+        "data_act:art33",
+        "data_act:art35",
+        "data_act:art26",
+        "data_act:art2"
+      ],
+      "scores": {
+        "context_precision": 0.249999999975,
+        "context_recall": 1.0,
+        "answer_relevancy": 0.990799984830279,
+        "faithfulness": 1.0
+      }
+    }
+  ]
+}

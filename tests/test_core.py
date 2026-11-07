@@ -250,3 +250,40 @@ def test_ragas_judge_adapter_scores_through_llm_complete(monkeypatch):
                                                   retrieved_contexts=["Article 5(1)(e) storage limitation", "Colours"])
     assert len(sent) == 2 and "storage limitation" in sent[0][0]["content"]
     assert score.value == pytest.approx(1.0)
+
+
+def test_web_search_sends_only_the_abstracted_query_and_blocks_leaks(tmp_path, monkeypatch):
+    import ddgs
+
+    from regcheck import analyzer, store
+    from regcheck.config import settings
+    from regcheck.schemas import Chunk, Dispute
+
+    assert analyzer.leak("GDPR retention limits for biometric data", "Store driver scans for 10 years.", "e-store") == ""
+    assert analyzer.leak("store driver scans for 10 years GDPR", "Store driver scans for 10 years.", "x") != ""
+    assert analyzer.leak("GDPR rules for E-Store order emails", "Send emails.", "e-store") != ""
+
+    monkeypatch.setattr(store, "embed", fake_embed)
+    srs = store.VectorStore(tmp_path / "acme-shop")
+    srs.add([Chunk(id="a:1", doc="a", parent_id="a", text="Driver face scans are kept for ten years."),
+             Chunk(id="a:2", doc="a", parent_id="a", text="Passwords are stored in plain text.")])
+    sent = []
+
+    class FakeDDGS:
+        def text(self, query, max_results):
+            sent.append(query)
+            return [{"href": "https://x", "title": "T", "body": "Retention must be limited."}]
+
+    monkeypatch.setattr(ddgs, "DDGS", FakeDDGS)
+    monkeypatch.setattr(settings().pipeline, "web_search", True)
+    prompts_seen = _scripted(monkeypatch, [
+        '{"a:1": "GDPR retention limits for biometric data", "a:2": "acme shop password storage GDPR"}',
+        '[{"requirement_id": "a:1", "valid": true, "message": "m"}, {"requirement_id": "a:2", "valid": true, "message": "m"}]'])
+    trace = []
+    disputes = [Dispute(requirement_id=r, flagged_by="cc1", missed_by="cc2", rationale="r") for r in ("a:1", "a:2")]
+    analyzer.validate(disputes, srs, srs, settings().regulations["gdpr"], trace)
+
+    assert sent == ["GDPR retention limits for biometric data"]  # the leaky query never reached the search
+    assert [t.get("web_blocked") for t in trace] == [None, "names the project"]
+    validate_prompt = prompts_seen[1][0]["content"]
+    assert validate_prompt.count("<web_result url=") == 1 and "Retention must be limited." in validate_prompt

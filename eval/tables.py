@@ -45,8 +45,8 @@ def run_tables() -> str:
             m = json.loads((d / "run.json").read_text())
             if (d / "monolithic.json").exists():
                 mono[m["srs"], m["reg"]] = len(json.loads((d / "monolithic.json").read_text()))
-            else:
-                latest[m["srs"], m["reg"]] = d
+            else:  # web-search runs are their own rows, so they never replace the default run
+                latest[m["srs"], m["reg"], m.get("web_search", False)] = d
 
     def counts(rnd: dict) -> list:
         flagged = [{f["requirement_id"] for f in rnd["reports"][a]["findings"] if f["status"] != "compliant"}
@@ -54,15 +54,16 @@ def run_tables() -> str:
         return [*map(len, flagged), len(set.intersection(*flagged))]
 
     t6, t7 = [], []
-    for (srs, reg), d in sorted(latest.items()):
+    for (srs, reg, web), d in sorted(latest.items()):
+        name = regs[reg].name + (" + web search" if web else "")
         rounds = json.loads((d / "rounds.json").read_text())
         first = counts(rounds[0])
         last = counts(rounds[-1]) if len(rounds) > 1 else [f"NA ({n})" for n in first]  # no disputes
-        t6.append([srs, regs[reg].name, *first, *last])
+        t6.append([srs, name, *first, *last])
         issues = json.loads((d / "final.json").read_text())["issues"]
         dec = json.loads((d / "decisions.json").read_text()) if (d / "decisions.json").exists() else {}
         accepted = f"{sum(v['decision'] == 'accept' for v in dec.values())}/{len(dec)}" if dec else "not reviewed"
-        t7.append([srs, regs[reg].name, len(issues), mono.get((srs, reg), "not run"), accepted])
+        t7.append([srs, name, len(issues), mono.get((srs, reg), "not run"), accepted])
     agents = [f"{a} ({settings().agents[a].model})" for a in CHECKERS]
     head6 = [f"{it}: {a}" for it in ("iteration 1", "iteration 2") for a in [*agents, "common"]]
     return (md("Table 6. Flagged requirements per checker and iteration", ["SRS", "Regulation", *head6], t6)

@@ -75,7 +75,9 @@ def _run(srs_name, reg_key, srs, policy, reg, trace, progress) -> Path:
 
     progress("ra: compiling the final report")
     final = analyzer.compile(reports, all_disputes, srs, reg, trace)
-    out = _save(f"{srs_name}-{reg_key}", {"run.json": {"srs": srs_name, "reg": reg_key}, "rounds.json": rounds,
+    out = _save(f"{srs_name}-{reg_key}", {"run.json": {"srs": srs_name, "reg": reg_key,
+                                                       "web_search": settings().pipeline.web_search},
+                                          "rounds.json": rounds,
                                           "final.json": final.model_dump(),
                                           "trace.json": trace})
     progress(f"{len(final.issues)} issues -> {out}")
