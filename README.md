@@ -10,6 +10,9 @@ Requirements" (ACM TOSEM 2026):
 
 `PLAN.md` is the design spec and records every departure from the paper.
 
+## Architecture Diagram
+![alt text](image.png)
+
 ## Install
 
 ```sh
