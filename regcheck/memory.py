@@ -4,6 +4,8 @@ ponytail: one JSONL + FAISS store replaces the paper's Redis/Neo4j; move to a gr
 ever needed.
 """
 
+import threading
+
 from .config import DATA, settings
 from .schemas import Chunk, Feedback
 from .store import VectorStore
@@ -14,7 +16,18 @@ STORE = DATA / "memory"
 THRESHOLD = 0.8
 
 
+_lock = threading.Lock()
+
+
 def remember(fb: Feedback) -> None:
+    # Streamlit runs reruns and sessions on threads of one process: a double-clicked Save once ran two
+    # load-then-append cycles at once and left 3 chunks for 2 vectors.
+    # ponytail: process-local lock; use a file lock if anything besides app.py ever writes the memory.
+    with _lock:
+        _remember(fb)
+
+
+def _remember(fb: Feedback) -> None:
     store = VectorStore(STORE)
     store.add([Chunk(id=f"fb:{len(store.chunks)}", doc="memory", parent_id="memory", text=fb.requirement,
                      meta=fb.model_dump(mode="json"))])

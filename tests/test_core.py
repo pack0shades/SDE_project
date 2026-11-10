@@ -235,6 +235,23 @@ def test_memory_recalls_same_regulation_similar_requirement_only(monkeypatch):
     assert memory.recall("User passwords will be stored in plain text.", "EU Data Act") == []
     assert memory.recall("The dashboard shall use the corporate colour scheme.", "GDPR") == []
 
+    # a double-clicked Save: concurrent remember() calls must not split chunks.jsonl from index.faiss
+    import threading
+    import time
+
+    def slow_embed(texts, query=False):
+        time.sleep(0.2)  # the window in which a second save used to read the stale store
+        return fake_embed(texts, query)
+
+    monkeypatch.setattr(store, "embed", slow_embed)
+    fb = Feedback(requirement="Orders are emailed to the user.", regulation="GDPR", clauses=[], status="partial",
+                  decision="accept", justification="ok")
+    threads = [threading.Thread(target=memory.remember, args=(fb,)) for _ in range(2)]
+    [t.start() for t in threads]
+    [t.join() for t in threads]
+    s = store.VectorStore(memory.STORE)  # raises on a vector/chunk mismatch
+    assert [c.id for c in s.chunks] == ["fb:0", "fb:1", "fb:2"]
+
 
 def test_ragas_judge_adapter_scores_through_llm_complete(monkeypatch):
     """ragas' prompts reach llm.complete and its schemas parse our replies (guards against ragas API drift)."""
