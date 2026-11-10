@@ -29,25 +29,34 @@ def main() -> None:
     p.add_argument("--n", type=int, default=30, help="sections to sample")
     p.add_argument("--seed", type=int, default=0)
     a = p.parse_args()
+    print(f"[DEBUG] args: doc={a.doc} n={a.n} seed={a.seed}")
     out = OUT / f"{a.doc}.qa.jsonl"
+    print(f"[DEBUG] output path: {out}")
     if out.exists():  # never clobber a hand-reviewed file
         raise SystemExit(f"{out} exists; delete it to regenerate")
 
     sections = [s for s in VectorStore(store_path(a.doc)).sections.values() if len(s.text) >= MIN_CHARS]
+    print(f"[DEBUG] {len(sections)} sections with at least {MIN_CHARS} chars in {store_path(a.doc)}")
     rng = random.Random(a.seed)
     picked = rng.sample(sections, min(a.n, len(sections)))
+    print(f"[DEBUG] picked {len(picked)} sections: {[s.id for s in picked]}")
 
     def sane(pairs: list[QA]) -> None:
+        print(f"[DEBUG] validating {len(pairs)} pairs")
         if not 3 <= len(pairs) <= 5:
             raise ValueError(f"expected 3 to 5 pairs, got {len(pairs)}")
 
     pairs, trace = [], []
     for i, s in enumerate(picked, 1):
+        print(f"[DEBUG] section {s.id}: {len(s.text)} chars")
         msgs = [{"role": "user", "content": prompts.GEN_QA.format(text=f"{s.ref}\n{s.text}")}]
         new = llm.complete_json("judge", msgs, list[QA], trace, validate=sane)
+        print(f"[DEBUG] {s.id}: {len(new)} pairs returned, "
+              f"{sum(bool(SELF_REFERENCE.search(q.question)) for q in new)} self-referencing dropped")
         pairs += [q.model_copy(update={"section": s.id}) for q in new if not SELF_REFERENCE.search(q.question)]
         print(f"{i}/{len(picked)} {s.ref[:60]}: {len(pairs)} pairs")
     rng.shuffle(pairs)  # so ragas_eval --limit n spans many sections, not the first few
+    print(f"[DEBUG] {len(pairs)} pairs after shuffle, {len(trace)} LLM calls traced")
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text("".join(q.model_dump_json() + "\n" for q in pairs))
     print(f"wrote {out}; review it before running ragas_eval")

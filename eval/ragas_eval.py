@@ -34,6 +34,7 @@ class Judge(InstructorBaseRagasLLM):
         self.trace = trace
 
     def generate(self, prompt, response_model):
+        print(f"[DEBUG] judge call: response_model={response_model}, prompt_chars={len(prompt)}")
         return llm.complete_json("judge", [{"role": "user", "content": prompt}], response_model, self.trace)
 
     async def agenerate(self, prompt, response_model):
@@ -44,6 +45,7 @@ class Embedder(BaseRagasEmbedding):
     """The pipeline's own bge-large model, for answer relevancy."""
 
     def embed_text(self, text, **kw):
+        print(f"[DEBUG] embedding {len(text)} chars")
         return store.embed([text])[0].tolist()
 
     async def aembed_text(self, text, **kw):
@@ -57,8 +59,12 @@ def main() -> None:
     p.add_argument("--mode", choices=["advanced", "baseline"], default="advanced")
     p.add_argument("--limit", type=int, default=10, help="first n questions of the QA file")
     a = p.parse_args()
+    print(f"[DEBUG] args: doc={a.doc} agent={a.agent} ({settings().agents[a.agent].model}) mode={a.mode} "
+          f"limit={a.limit}")
     qas = [QA.model_validate_json(line) for line in (QA_DIR / f"{a.doc}.qa.jsonl").read_text().splitlines()]
+    print(f"[DEBUG] loaded {len(qas)} QA pairs from {QA_DIR / f'{a.doc}.qa.jsonl'}")
     qas = qas[: a.limit]
+    print(f"[DEBUG] scoring {len(qas)} QA pairs")
 
     trace: list[dict] = []
     judge = Judge(trace)
@@ -74,19 +80,25 @@ def main() -> None:
         "faithfulness": lambda q, ans: f.score(user_input=q.question, response=ans.text,
                                                retrieved_contexts=ans.contexts),
     }
+    print(f"[DEBUG] metrics: {list(metrics)}")
     if a.mode == "advanced":  # CoT, agentic chunks, MMR, re-ranking, parent articles
         vs, kw = store.VectorStore(store_path(a.doc)), {}
     else:  # fixed chunks, one-shot plain top-n similarity
         vs = store.VectorStore(store_path(a.doc, "fixed"))
         kw = {"cot": False, "mmr": False, "rerank": False, "parents": False}
+    print(f"[DEBUG] store {vs.path}: {len(vs.chunks)} chunks, {len(vs.sections)} sections; answer kwargs={kw}")
 
     rows = []
     for i, qa in enumerate(qas, 1):
+        print(f"[DEBUG] question {i} (section {qa.section}): {qa.question}")
         ans = answer(a.agent, qa.question, vs, trace, **kw)
+        print(f"[DEBUG] answer: {len(ans.text)} chars, {len(ans.steps)} steps, {len(ans.contexts)} contexts, "
+              f"sources={[s for st in ans.steps for s in st.sources]}")
         scores = {}
         for name, metric in metrics.items():
             try:
                 scores[name] = metric(qa, ans).value
+                print(f"[DEBUG] {name} = {scores[name]}")
             except ValueError as e:  # judge output unusable even after the repair retry: skip, do not guess
                 print(f"  {name} skipped: {str(e)[:120]}")
                 scores[name] = math.nan
@@ -94,6 +106,8 @@ def main() -> None:
                      "sources": [s for st in ans.steps for s in st.sources], "scores": scores})
         print(f"{i}/{len(qas)} " + " ".join(f"{k}={v:.2f}" for k, v in scores.items()))
 
+    print("[DEBUG] skipped scores per metric:", {k: sum(math.isnan(r["scores"][k]) for r in rows) for k in metrics})
+    print(f"[DEBUG] {len(trace)} trace entries")
     means = {k: round(fmean(v for r in rows if not math.isnan(v := r["scores"][k])), 3) for k in metrics}
     out = RESULTS / f"{a.doc}-{a.agent}-{a.mode}.json"
     out.parent.mkdir(parents=True, exist_ok=True)
